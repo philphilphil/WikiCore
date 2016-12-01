@@ -1,0 +1,10 @@
+@model WikiCore.Models.PageModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="ui container">
+    <h2>@Html.Raw(Model.Title)</h2>
+    @Html.Raw(Model.pageContent)
+</div>
+
