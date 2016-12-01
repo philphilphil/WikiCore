@@ -20,9 +20,7 @@ namespace WikiCore.Models
                     this.Title = page.Title;
                     this.Id = page.Id;
                 }
-            }
-
-            
+            }         
         }
 
          public EditModel() {

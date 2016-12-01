@@ -4,12 +4,13 @@
 }
 
 <div class="ui container">
-<form method="post" asp-action="Save" asp-controller="Edit"> 
+<form method="post" asp-action="Update" asp-controller="Edit"> 
   <div class="ui labeled input">
   <div class="ui label">
     Titel
   </div>
   <input type="text" id="Title" placeholder="Title" asp-for="Title">
+  <input type="hidden" id="Id" asp-for="Id">
 </div>
   <br /> <br />
     <textarea asp-for="pageContent"></textarea>
