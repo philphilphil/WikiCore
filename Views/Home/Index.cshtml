@@ -6,5 +6,6 @@
 <div class="ui container">
     <h2>@Html.Raw(Model.Title)</h2>
     @Html.Raw(Model.pageContent)
+    @Html.ActionLink("Edit", "Index", "Edit", new { id = Model.Id })
 </div>
 
