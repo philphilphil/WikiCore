@@ -1,0 +1,24 @@
+@model WikiCore.Models.HelpModel
+
+@{
+    ViewData["Title"] = "All pages";
+}
+<div class="ui container">
+    <h2>@ViewData["Title"]</h2>
+</div>
+<h3>Add category:</h3>
+<form method="post" asp-action="AddCategory" asp-controller="Home"> 
+  <div class="ui labeled input">
+  <div class="ui label">
+    Name
+  </div>
+  <input type="text" id="Title" placeholder=".." asp-for="CategoryName">
+</div>
+  <button type="submit" class="ui primary button">Add</button>
+</form>
+<h3>All pages:</h3>
+ @foreach (var page in Model.Pages) {
+     <p>      
+        @Html.ActionLink(page.Title, "Index", "Home", new { id = page.Id })
+     </p>
+ }

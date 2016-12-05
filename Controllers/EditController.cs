@@ -1,7 +1,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WikiCore.Models;
-using WikiCore.SQLite;
+using WikiCore.DB;
 
 namespace WikiCore.Controllers
 {

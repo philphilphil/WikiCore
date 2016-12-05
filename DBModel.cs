@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace  WikiCore.SQLite
+namespace  WikiCore.DB
 {
     public class WikiContext : DbContext
     {

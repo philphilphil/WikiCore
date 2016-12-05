@@ -1,5 +1,5 @@
 using System.Linq;
-using WikiCore.SQLite;
+using WikiCore.DB;
 
 namespace WikiCore.Models
 {
