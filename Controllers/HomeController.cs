@@ -13,10 +13,10 @@ namespace WikiCore.Controllers
             return View(m);
         }
 
-        public IActionResult Help()
+        public IActionResult Misc()
         {
 
-            return View(new HelpModel());
+            return View(new MiscModel());
         }
 
         public IActionResult Error()
@@ -24,7 +24,7 @@ namespace WikiCore.Controllers
             return View();
         }
 
-        public IActionResult AddCategory(HelpModel m)
+        public IActionResult AddCategory(MiscModel m)
         {
 
             if (!string.IsNullOrEmpty(m.CategoryName))
@@ -32,7 +32,7 @@ namespace WikiCore.Controllers
                DBService.AddCategorie(m);
             }
 
-            return View("Help", new HelpModel());
+            return View("Help", new MiscModel());
         }
     }
 }

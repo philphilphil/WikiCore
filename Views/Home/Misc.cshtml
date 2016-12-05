@@ -1,7 +1,7 @@
-@model WikiCore.Models.HelpModel
+@model WikiCore.Models.MiscModel
 
 @{
-    ViewData["Title"] = "All pages";
+    ViewData["Title"] = "Miscellaneous";
 }
 <div class="ui container">
     <h2>@ViewData["Title"]</h2>
@@ -16,6 +16,12 @@
 </div>
   <button type="submit" class="ui primary button">Add</button>
 </form>
+<h3>All categories:</h3>
+ @foreach (var c in Model.Categories) {
+     <p>      
+        @Html.Raw(c.Name)
+     </p>
+ }
 <h3>All pages:</h3>
  @foreach (var page in Model.Pages) {
      <p>      

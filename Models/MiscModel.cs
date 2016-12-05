@@ -5,18 +5,21 @@ using WikiCore.DB;
 namespace WikiCore.Models
 {
 
-    public class HelpModel
+    public class MiscModel
     {
 
         public List<Page> Pages = new List<Page>();
 
+        public List<Category> Categories = new List<Category>();
+
         public string CategoryName { get; set; }
 
-        public HelpModel()
+        public MiscModel()
         {
             using (var db = new WikiContext())
             {
                 this.Pages = db.Pages.ToList();
+                this.Categories = db.Categories.ToList();
             }
         }
     }
