@@ -32,7 +32,7 @@ namespace WikiCore.Controllers
                DBService.AddCategorie(m);
             }
 
-            return View("Help", new MiscModel());
+            return View("Misc", new MiscModel());
         }
     }
 }

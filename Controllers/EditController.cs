@@ -23,7 +23,9 @@ namespace WikiCore.Controllers
             {
                 var page = new Page {
                     Title = model.Title, 
-                    Content = model.pageContent
+                    Content = model.pageContent,
+                    CategoryId = int.Parse(model.CategoryId)
+
                 };
                 db.Pages.Add(page);
                 db.SaveChanges();      
@@ -39,6 +41,7 @@ namespace WikiCore.Controllers
                 var page = db.Pages.Where(p => p.Id == model.Id).FirstOrDefault();
                 page.Title = model.Title;
                 page.Content = model.pageContent;
+                page.CategoryId = int.Parse(model.CategoryId);
                 db.SaveChanges();      
 
                 return RedirectToAction("Index", "Home", new { page.Id }); 

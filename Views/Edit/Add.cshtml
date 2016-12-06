@@ -13,6 +13,12 @@
     Titel
   </div>
   <input type="text" id="Title" placeholder="Title" asp-for="Title">
+</div>&nbsp;&nbsp;
+ <div class="ui labeled input">
+  <div class="ui label">
+    Category
+  </div>
+  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
 </div>
   <br /> <br />
     <textarea asp-for="pageContent"></textarea>

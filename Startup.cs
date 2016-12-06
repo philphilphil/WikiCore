@@ -35,6 +35,7 @@ namespace WikiCore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
