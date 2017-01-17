@@ -10,6 +10,7 @@ namespace WikiCore.DB
             {
                 Category c = new Category();
                 c.Name = h.CategoryName;
+                c.CategoryParentId = h.CategoryId;
 
                 db.Categories.Add(c);
                 db.SaveChanges();

@@ -26,6 +26,7 @@ namespace  WikiCore.DB
     public class Category {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int CategoryParentId { get; set; }
         public string Name { get; set; }
     }
 }

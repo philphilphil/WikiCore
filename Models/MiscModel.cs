@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WikiCore.DB;
 
 namespace WikiCore.Models
@@ -10,16 +11,36 @@ namespace WikiCore.Models
 
         public List<Page> Pages = new List<Page>();
 
-        public List<Category> Categories = new List<Category>();
+       // public List<Category> Categories = new List<Category>();
+       public List<SelectListItem> Categories = new List<SelectListItem>();
 
         public string CategoryName { get; set; }
+
+        public int CategoryId { get; set; }
 
         public MiscModel()
         {
             using (var db = new WikiContext())
             {
                 this.Pages = db.Pages.ToList();
-                this.Categories = db.Categories.ToList();
+                LoadCategories();
+            }
+        }
+
+          private void LoadCategories()
+        {
+            using (var db = new WikiContext())
+            {
+                var cats = db.Categories.ToList();
+
+                foreach (var item in cats)
+                {
+                    this.Categories.Add(new SelectListItem 
+                    {
+                        Text = item.Name,
+                        Value = item.Id.ToString(),
+                    });
+                }
             }
         }
     }

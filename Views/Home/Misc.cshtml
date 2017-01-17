@@ -13,13 +13,20 @@
     Name
   </div>
   <input type="text" id="Title" placeholder=".." asp-for="CategoryName">
+  &nbsp;
+    <div class="ui labeled input">
+  <div class="ui label">
+    Parent
+  </div>
+  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
 </div>
-  <button type="submit" class="ui primary button">Add</button>
+</div>
+ <button type="submit" class="ui primary button">Add</button>
 </form>
-<h3>All categories:</h3>
+<h3>Categorie tree:</h3>
  @foreach (var c in Model.Categories) {
      <p>      
-        @Html.Raw(c.Name)
+       @Html.Raw(c.Text)
      </p>
  }
 <h3>All pages:</h3>
