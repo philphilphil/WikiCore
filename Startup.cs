@@ -59,6 +59,8 @@ namespace WikiCore
                     name: "edit",
                     template: "{controller=Edit}/{action=Index}/{id?}");
             });
+
+            DbInitializer.InitializeDb();
         }
     }
 }
