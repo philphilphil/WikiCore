@@ -14,3 +14,12 @@ $(function () {
 
     $('.ui.checkbox').checkbox();
 });
+
+$('.ui.search')
+  .search({
+    apiSettings: {
+      url: '/Home/Search?text={query}'
+    },
+    minCharacters : 3
+  })
+;
