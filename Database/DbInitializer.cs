@@ -6,6 +6,8 @@ public static class DbInitializer {
         
         using (WikiContext db = new WikiContext()) {
             
+            db.Database.EnsureCreated();
+
             //Only Initialize if DB is Empty
             if (db.Pages.Any())
                 return;
