@@ -26,7 +26,8 @@ public static class DbInitializer {
 
         Page p = new Page();
         p.CategoryId = c.Id;
-        p.Title = "Overview";
+        p.Title = "Start";
+        p.Content = "Welcome to __WikiCore__. Some Text will be added here explaining how WikiCore works.";
         db.Pages.Add(p);
 
         db.SaveChanges();
