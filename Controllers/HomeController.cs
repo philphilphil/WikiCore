@@ -16,7 +16,6 @@ namespace WikiCore.Controllers
 
         public IActionResult Misc()
         {
-
             return View(new MiscModel());
         }
 
@@ -38,7 +37,6 @@ namespace WikiCore.Controllers
 
         public IActionResult AddCategory(MiscModel m)
         {
-
             if (!string.IsNullOrEmpty(m.CategoryName))
             {
                DBService.AddCategorie(m);
