@@ -1,13 +1,7 @@
-FROM microsoft/dotnet:latest
-
-COPY . /app
-
+FROM microsoft/aspnetcore:1.1.1
 WORKDIR /app
-
-RUN ["dotnet", "restore"]
-
-RUN ["dotnet", "build"]
-
-EXPOSE 5000/tcp
-
-CMD ["dotnet", "run", "--server.urls", "http://*:5000"]
+COPY bin/Debug/netcoreapp1.1/publish /app
+ENV ASPNETCORE_URLS http://*:5000
+EXPOSE 5000
+ 
+ENTRYPOINT /bin/bash -c "dotnet WikiCore.dll"
