@@ -24,7 +24,7 @@
  <button type="submit" class="ui primary button">Add</button>
 </form>
 <h3>Categorie tree:</h3>
- @foreach (Tuple<int, string> c in Model.CategorieTree) {   
+ @foreach (Tuple<int, string, int> c in Model.CategoryTree) {   
        @Html.Raw(new String('-', c.Item1) + " " + c.Item2)<br />
  }
 <h3>All pages:</h3>

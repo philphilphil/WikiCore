@@ -15,7 +15,7 @@ namespace WikiCore.Models
         // public List<Category> Categories = new List<Category>();
         public List<SelectListItem> Categories = new List<SelectListItem>();
 
-        public List<Tuple<int, string>> CategorieTree = new List<Tuple<int, string>>();
+        public List<Tuple<int, string, int>> CategoryTree = new List<Tuple<int, string, int>>();
         public string CategoryName { get; set; }
 
         public int CategoryId { get; set; }
@@ -26,7 +26,7 @@ namespace WikiCore.Models
             {
                 this.Pages = db.Pages.ToList();
                 LoadCategories();
-                BuildCategorieTree();
+                BuildCategoryTree();
             }
         }
 
@@ -51,7 +51,7 @@ namespace WikiCore.Models
                 }
             }
         }
-        private void BuildCategorieTree()
+        private void BuildCategoryTree()
         {
             using (var db = new WikiContext())
             {
@@ -60,7 +60,7 @@ namespace WikiCore.Models
 
                 foreach (Category cat in toplevelCategories)
                 {
-                    CategorieTree.Add(Tuple.Create(1, cat.Name));
+                    CategoryTree.Add(Tuple.Create(1, cat.Name, cat.Id));
                     LoadCategorieChildren(cat, 1);
                 }
             }
@@ -75,7 +75,7 @@ namespace WikiCore.Models
 
                 foreach (Category cat in childCategories)
                 {
-                    CategorieTree.Add(Tuple.Create(v+1, cat.Name));
+                    CategoryTree.Add(Tuple.Create(v+1, cat.Name, cat.Id));
                     LoadCategorieChildren(cat, v+1);
                 }
             }
