@@ -14,11 +14,6 @@ namespace WikiCore.Controllers
             return View(m);
         }
 
-        public IActionResult Misc()
-        {
-            return View(new MiscModel());
-        }
-
         public IActionResult Error()
         {
             return View();
@@ -28,21 +23,12 @@ namespace WikiCore.Controllers
         {
             var results = SearchHelper.Search(text.ToLower());
             //Build correct object for semantic-ui search box
-            var searchResults = new {
+            var searchResults = new
+            {
                 results = results
             };
 
             return Json(searchResults);
-        }
-
-        public IActionResult AddCategory(MiscModel m)
-        {
-            if (!string.IsNullOrEmpty(m.CategoryName))
-            {
-               DBService.AddCategorie(m);
-            }
-
-            return View("Misc", new MiscModel());
         }
     }
 }

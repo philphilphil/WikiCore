@@ -3,11 +3,9 @@
 @{
     ViewData["Title"] = "Miscellaneous";
 }
-<div class="ui container">
-    <h2>@ViewData["Title"]</h2>
-</div>
-<h3>Add category:</h3>
-<form method="post" asp-action="AddCategory" asp-controller="Home"> 
+<h2>Categories</h2>
+<h4>Add</h4>
+<form method="post" asp-action="AddCategory" asp-controller="Misc"> 
   <div class="ui labeled input">
   <div class="ui label">
     Name
@@ -23,7 +21,24 @@
 </div>
  <button type="submit" class="ui primary button">Add</button>
 </form>
-<h3>Categorie tree:</h3>
+<h4>Remove</h4>
+<form method="post" asp-action="DeleteCategory" asp-controller="Misc"> 
+  <div class="ui labeled input">
+  <div class="ui label">
+    Category
+  </div>
+  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
+</div>
+  <div class="ui labeled input">
+  <div class="ui label">
+    Move Pages to
+  </div>
+  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
+</div>
+ <button type="submit" class="ui primary button">Remove</button>
+</form>
+
+<h4>Tree:</h4>
  @foreach (Tuple<int, string, int> c in Model.CategoryTree) {   
        @Html.Raw(new String('-', c.Item1) + " " + c.Item2)<br />
  }
