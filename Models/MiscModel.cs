@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,8 +12,8 @@ namespace WikiCore.Models
 
         public List<Page> Pages = new List<Page>();
 
-       // public List<Category> Categories = new List<Category>();
-       public List<SelectListItem> Categories = new List<SelectListItem>();
+        // public List<Category> Categories = new List<Category>();
+        public List<SelectListItem> Categories = new List<SelectListItem>();
 
         public string CategoryName { get; set; }
 
@@ -27,15 +28,20 @@ namespace WikiCore.Models
             }
         }
 
-          private void LoadCategories()
+        private void LoadCategories()
         {
             using (var db = new WikiContext())
             {
                 var cats = db.Categories.ToList();
+                this.Categories.Add(new SelectListItem
+                {
+                    Text = "None",
+                    Value = "0",
+                });
 
                 foreach (var item in cats)
                 {
-                    this.Categories.Add(new SelectListItem 
+                    this.Categories.Add(new SelectListItem
                     {
                         Text = item.Name,
                         Value = item.Id.ToString(),
