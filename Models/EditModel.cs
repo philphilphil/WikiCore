@@ -46,11 +46,6 @@ namespace WikiCore.Models
 
         public EditModel()
         {
-            this.Categories.Add(new SelectListItem
-            {
-                Text = "Select",
-                Value = ""
-            });
             LoadCategories();
         }
 
