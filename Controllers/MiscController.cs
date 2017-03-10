@@ -24,12 +24,21 @@ namespace WikiCore.Controllers
 
         public IActionResult DeleteCategory(MiscModel m)
         {
-            if (!string.IsNullOrEmpty(m.CategoryName))
+            if (m.CategoryId == m.CategoryNewId)
             {
-                //DBService.DelCategory(m);
-            }
+               Error("Please select a different category to move pages to");
+            } else {
+                DBService.DeleteCategory(m.CategoryId, m.CategoryNewId);
+            } 
 
             return RedirectToAction("Index");
+        }
+
+        private IActionResult Error(string message) {
+
+            ViewData["ErrorMessage"] = message;
+
+            return View("Index", new MiscModel());
         }
     }
 }
