@@ -15,6 +15,10 @@ namespace WikiCore.Models
         // public List<Category> Categories = new List<Category>();
         public List<SelectListItem> Categories = new List<SelectListItem>();
 
+        public List<SelectListItem> DeleteCategories = new List<SelectListItem>();
+
+        public List<SelectListItem> MoveCategories = new List<SelectListItem>();
+
         public List<Tuple<int, string, int>> CategoryTree = new List<Tuple<int, string, int>>();
         public string CategoryName { get; set; }
 
@@ -44,11 +48,16 @@ namespace WikiCore.Models
 
                 foreach (var item in cats)
                 {
-                    this.Categories.Add(new SelectListItem
+                    var c = new SelectListItem { Text = item.Name, Value = item.Id.ToString() };
+                    this.Categories.Add(c);
+                    this.MoveCategories.Add(c);
+
+                    //Dont add "Main"-category to deletion list
+                    if (item.Id != 1)
                     {
-                        Text = item.Name,
-                        Value = item.Id.ToString(),
-                    });
+                        this.DeleteCategories.Add(c);
+                    }
+
                 }
             }
         }
