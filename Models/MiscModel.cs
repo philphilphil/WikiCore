@@ -19,6 +19,7 @@ namespace WikiCore.Models
         public string CategoryName { get; set; }
 
         public int CategoryId { get; set; }
+        public int CategoryNewId { get; set; }
 
         public MiscModel()
         {
@@ -75,8 +76,8 @@ namespace WikiCore.Models
 
                 foreach (Category cat in childCategories)
                 {
-                    CategoryTree.Add(Tuple.Create(v+1, cat.Name, cat.Id));
-                    LoadCategorieChildren(cat, v+1);
+                    CategoryTree.Add(Tuple.Create(v + 1, cat.Name, cat.Id));
+                    LoadCategorieChildren(cat, v + 1);
                 }
             }
         }

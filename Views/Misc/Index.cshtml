@@ -1,8 +1,19 @@
 @model WikiCore.Models.MiscModel
 
 @{
-    ViewData["Title"] = "Miscellaneous";
+  ViewData["Title"] = "Miscellaneous";
+  
+  if (ViewData["ErrorMessage"] != null) {
+    <div class="ui negative message">
+    <i class="close icon"></i>
+    <div class="header">
+    Error
+     </div>
+    <p>@ViewData["ErrorMessage"]
+    </p></div>
+  }
 }
+
 <h2>Categories</h2>
 <h4>Add</h4>
 <form method="post" asp-action="AddCategory" asp-controller="Misc"> 
@@ -27,7 +38,7 @@
   <div class="ui label">
     Category
   </div>
-  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
+  <select asp-for="CategoryNewId"  asp-items="@Model.Categories" class="ui dropdown"></select>
 </div>
   <div class="ui labeled input">
   <div class="ui label">
