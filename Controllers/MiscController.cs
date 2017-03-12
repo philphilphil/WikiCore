@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using WikiCore.Models;
-using WikiCore.SearchHelpers;
 using WikiCore.DB;
 
 namespace WikiCore.Controllers
@@ -26,7 +25,7 @@ namespace WikiCore.Controllers
         {
             if (m.CategoryId == m.CategoryNewId)
             {
-               Error("Please select a different category to move pages to");
+               return Error("Please select a different category to move pages to");
             } else {
                 DBService.DeleteCategory(m.CategoryId, m.CategoryNewId);
             } 
