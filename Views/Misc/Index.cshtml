@@ -3,49 +3,35 @@
 @{
   ViewData["Title"] = "Miscellaneous";
 }
-<h2>Categories</h2>
+<h2>Tags</h2>
 <h4>Add</h4>
-<form method="post" asp-action="AddCategory" asp-controller="Misc"> 
+<form method="post" asp-action="AddTag" asp-controller="Misc"> 
   <div class="ui labeled input">
   <div class="ui label">
     Name
   </div>
   <input type="text" id="Title" placeholder=".." asp-for="CategoryName">
-  &nbsp;
-    <div class="ui labeled input">
-  <div class="ui label">
-    Parent
   </div>
-  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
-</div>
-</div>
  <button type="submit" class="ui primary button">Add</button>
 </form>
 <h4>Remove</h4>
-<form method="post" asp-action="DeleteCategory" asp-controller="Misc"> 
+<form method="post" asp-action="DeleteTag" asp-controller="Misc"> 
   <div class="ui labeled input">
   <div class="ui label">
-    Category
+    Tag
   </div>
-  <select asp-for="CategoryId"  asp-items="@Model.DeleteCategories" class="ui dropdown"></select>
-</div>
-  <div class="ui labeled input">
-  <div class="ui label">
-    Move Pages to
-  </div>
-  <select asp-for="CategoryNewId"  asp-items="@Model.MoveCategories" class="ui dropdown"></select>
+  <select asp-for="TagId"  asp-items="@Model.TagsSelect" class="ui dropdown"></select>
 </div>
  <button type="submit" class="ui primary button">Remove</button>
- <br />All pages and child-categories of the deleted categorie will be moved
 </form>
 
-<h4>Tree:</h4>
- @foreach (Tuple<int, string, int> c in Model.CategoryTree) {   
-       @Html.Raw(new String('-', c.Item1) + " " + c.Item2)<br />
+<h4>Tags:</h4>
+ @foreach (var t in Model.Tags) {   
+       <a class="ui tag label">@t.Name </a>
  }
 <h3>All pages:</h3>
  @foreach (var page in Model.Pages) {
      <p>      
-        @Html.ActionLink(page.Title, "Index", "Home", new { id = page.Id })
+        @Html.ActionLink(page.Title, "Index", "Home", new { id = page.PageId })
      </p>
  }

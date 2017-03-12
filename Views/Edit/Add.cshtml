@@ -5,27 +5,32 @@
 
 <div class="ui container">
     <h2>@ViewData["Title"].</h2>
-
-
 <form method="post" asp-action="Save" asp-controller="Edit"> 
   <div class="ui labeled input">
   <div class="ui label">
     Titel
   </div>
   <input type="text" id="Title" placeholder="Title" asp-for="Title">
-</div>&nbsp;&nbsp;
- <div class="ui labeled input">
-  <div class="ui label">
-    Category
-  </div>
-  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
-</div>
-  <br /> <br />
+</div><br /><br />
+  <input type="text" asp-for="Tags" id="tags">
+  <br />
     <textarea asp-for="pageContent"></textarea>
   <button type="submit" class="ui primary button">Submit</button>
 </form>
 
 <script>
 var simplemde = new SimpleMDE({ element: document.getElementById("pageContent") });
+
+
+
+$('#tags').tagEditor({
+    autocomplete: {
+        delay: 0, // show suggestions immediately
+        position: { collision: 'flip' }, // automatic menu position up/down
+        source: ['ActionScript', 'AppleScript', 'Asp', ... 'Python', 'Ruby']
+    },
+    forceLowercase: false,
+    placeholder: 'Programming languages ...'
+});
 </script>
 </div>

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,8 +13,10 @@ namespace WikiCore.Models
 
         public string CategoryName { get; set; }
 
-        public int CategoryId { get; set; }
-        public int CategoryNewId { get; set; }
+        public int TagId { get; set; }
+
+        public List<Tag> Tags = new List<Tag>();
+        public List<SelectListItem> TagsSelect = new List<SelectListItem>();
 
         public MiscModel()
         {

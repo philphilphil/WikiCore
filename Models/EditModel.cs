@@ -12,7 +12,7 @@ namespace WikiCore.Models
 
         public List<SelectListItem> Categories = new List<SelectListItem>();
 
-        public string CategoryId { get; set; }
+        public string Tags { get; set; }
 
         public string Title { get; set; }
 
@@ -46,6 +46,7 @@ namespace WikiCore.Models
 
         public EditModel()
         {
+            this.Tags = "Test, test2";
             LoadCategories();
         }
 
