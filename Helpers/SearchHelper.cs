@@ -21,7 +21,7 @@ namespace WikiCore.SearchHelpers
 
             foreach (Page item in pagesFound)
             {
-                result.Add(new SearchResult { title = item.Title, url = "/Home/Index/" + item.Id, description = GetDescription(searchText, item.Content) });
+                result.Add(new SearchResult { title = item.Title, url = "/Home/Index/" + item.PageId, description = GetDescription(searchText, item.Content) });
             }
 
             return result;

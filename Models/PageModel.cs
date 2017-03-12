@@ -22,14 +22,14 @@ namespace WikiCore.Models
             using (var db = new WikiContext())
             {
                 //Search for page, if not found load default page
-                Page page = db.Pages.Where(p => p.Id == id).FirstOrDefault();
+                Page page = db.Pages.Where(p => p.PageId == id).FirstOrDefault();
                 if (page != null)
                 {
                     LoadPageData(page);
                 }
                 else
                 {
-                    Page pageOverview = db.Pages.Where(p => p.Id == 1).FirstOrDefault();
+                    Page pageOverview = db.Pages.Where(p => p.PageId == 1).FirstOrDefault();
                     LoadPageData(pageOverview);
                 }
             }
@@ -49,7 +49,7 @@ namespace WikiCore.Models
         {
             this.Title = page.Title;
             this.pageContent = CommonMark.CommonMarkConverter.Convert(page.Content);
-            this.Id = page.Id;
+            this.Id = page.PageId;
         }
 
 

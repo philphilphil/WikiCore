@@ -20,15 +20,26 @@ public static class DbInitializer {
     private static void CreateOverviewPage(WikiContext db)
     {
         
-        Category c = new Category();
-        c.Name = "Main";
-        db.Categories.Add(c);
+        Tag t1 = new Tag();
+        t1.Name = "Main";
+        t1.Color = 1;
+        db.Tags.Add(t1);
+
+        Tag t2 = new Tag();
+        t2.Name = "Main";
+        t2.Color = 1;
+        db.Tags.Add(t2);
 
         Page p = new Page();
-        p.CategoryId = c.Id;
         p.Title = "Start";
         p.Content = "Welcome to __WikiCore__. Some Text will be added here explaining how WikiCore works.";
         db.Pages.Add(p);
+
+        var pt = new PageTag { Tag = t1, Page = p };
+        db.PageTags.Add(pt);
+
+        pt = new PageTag { Tag = t2, Page = p };
+        db.PageTags.Add(pt);
 
         db.SaveChanges();
     }

@@ -23,12 +23,12 @@ namespace WikiCore.Controllers
 
         public IActionResult DeleteCategory(MiscModel m)
         {
-            if (m.CategoryId == m.CategoryNewId)
-            {
-               return Error("Please select a different category to move pages to");
-            } else {
-                DBService.DeleteCategory(m.CategoryId, m.CategoryNewId);
-            } 
+            // if (m.CategoryId == m.CategoryNewId)
+            // {
+            //    return Error("Please select a different category to move pages to");
+            // } else {
+            //     DBService.DeleteCategory(m.CategoryId, m.CategoryNewId);
+            // } 
 
             return RedirectToAction("Index");
         }
