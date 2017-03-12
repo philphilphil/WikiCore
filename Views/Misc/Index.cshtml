@@ -13,7 +13,7 @@
     </p></div>
   }
 }
-
+@ViewData["ErrorMessage"]
 <h2>Categories</h2>
 <h4>Add</h4>
 <form method="post" asp-action="AddCategory" asp-controller="Misc"> 
@@ -47,6 +47,7 @@
   <select asp-for="CategoryNewId"  asp-items="@Model.MoveCategories" class="ui dropdown"></select>
 </div>
  <button type="submit" class="ui primary button">Remove</button>
+ <br />All pages and child-categories of the deleted categorie will be moved
 </form>
 
 <h4>Tree:</h4>
