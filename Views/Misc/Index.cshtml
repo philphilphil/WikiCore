@@ -2,18 +2,7 @@
 
 @{
   ViewData["Title"] = "Miscellaneous";
-
-  if (ViewData["ErrorMessage"] != null) {
-    <div class="ui negative message">
-    <i class="close icon"></i>
-    <div class="header">
-    Error
-     </div>
-    <p>@ViewData["ErrorMessage"]
-    </p></div>
-  }
 }
-@ViewData["ErrorMessage"]
 <h2>Categories</h2>
 <h4>Add</h4>
 <form method="post" asp-action="AddCategory" asp-controller="Misc"> 

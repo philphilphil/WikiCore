@@ -54,6 +54,17 @@
     <!-- Page Contents -->
     <div class="pusher">
         <div class="ui container content">
+            @{
+                if (ViewData["ErrorMessage"] != null) {
+                    <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                    Error
+                    </div>
+                    <p>@ViewData["ErrorMessage"]
+                    </p></div>
+                }
+            }
             @RenderBody()
         </div>
 
