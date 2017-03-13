@@ -36,7 +36,7 @@ namespace WikiCore.DB
 
                 foreach (string tag in tagList)
                 {
-                    Tag dbTag = GetOrCreateTag(tag);
+                    Tag dbTag = GetTag(tag);
 
                     CreatePageTageReference(dbTag.TagId, pageId);
                 }
@@ -61,7 +61,7 @@ namespace WikiCore.DB
             }
         }
 
-        private static Tag GetOrCreateTag(string name)
+        private static Tag GetTag(string name)
         {
             using (var db = new WikiContext())
             {
