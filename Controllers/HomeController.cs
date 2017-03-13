@@ -7,9 +7,9 @@ namespace WikiCore.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index(int id)
+        public IActionResult Index(int pageId)
         {
-            PageModel m = new PageModel(id);
+            PageModel m = new PageModel(pageId);
 
             return View(m);
         }

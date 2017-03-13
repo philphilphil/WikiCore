@@ -19,19 +19,15 @@ namespace WikiCore.Controllers
 
         public IActionResult Save(EditModel model)
         {
-            using (var db = new WikiContext())
-            {
-                var page = new Page {
-                    Title = model.Title, 
-                    Content = model.pageContent,
-                  //  CategoryId = int.Parse(model.CategoryId)
+            int pageId = DBService.SavePage(model);
 
-                };
-                db.Pages.Add(page);
-                db.SaveChanges();      
+            if(pageId == 0) {
+                ViewData["ErrorMessage"] = "Something went wrong adding the page..";
+                return View("Add", new EditModel());
+            }
 
-                return RedirectToAction("Index", "Home", new { page.PageId }); 
-            }           
+            return RedirectToAction("Index", "Home", new { pageId });
+
         }
 
         public IActionResult Update(EditModel model)
@@ -41,11 +37,11 @@ namespace WikiCore.Controllers
                 var page = db.Pages.Where(p => p.PageId == model.Id).FirstOrDefault();
                 page.Title = model.Title;
                 page.Content = model.pageContent;
-              //  page.CategoryId = int.Parse(model.CategoryId);
-                db.SaveChanges();      
+                //  page.CategoryId = int.Parse(model.CategoryId);
+                db.SaveChanges();
 
-                return RedirectToAction("Index", "Home", new { page.PageId }); 
-            }           
+                return RedirectToAction("Index", "Home", new { page.PageId });
+            }
         }
     }
 }

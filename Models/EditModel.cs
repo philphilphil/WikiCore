@@ -28,6 +28,7 @@ namespace WikiCore.Models
                     this.pageContent = page.Content;
                     this.Title = page.Title;
                     this.Id = page.PageId;
+                   // this.Tags = page.PageTags;
                     
                    // var cat = db.Categories.Where(c => c.Id == page.CategoryId).FirstOrDefault();
                     // if (cat == null)
@@ -46,7 +47,6 @@ namespace WikiCore.Models
 
         public EditModel()
         {
-            this.Tags = "Test, test2";
             LoadCategories();
         }
 
