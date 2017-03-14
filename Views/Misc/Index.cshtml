@@ -13,9 +13,10 @@
   <select asp-for="TagId"  asp-items="@Model.TagsSelect" class="ui dropdown"></select>
 </div>
  <button type="submit" class="ui primary button">Remove</button>
+Tag will be removed from all pages and deleted.
 </form>
 
-<h3>All pages:</h3>
+<h2>All pages:</h2>
  @foreach (var page in Model.Pages) {
      <p>      
         @Html.ActionLink(page.Title, "Index", "Home", new { id = page.PageId })
