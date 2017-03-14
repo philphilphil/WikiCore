@@ -12,11 +12,9 @@
   <input type="text" id="Title" placeholder="Title" asp-for="Title">
   <input type="hidden" id="Id" asp-for="Id">
 </div>&nbsp;&nbsp;
- <div class="ui labeled input">
-  <div class="ui label">
-    Category
-  </div>
-  <select asp-for="CategoryId"  asp-items="@Model.Categories" class="ui dropdown"></select>
+ <br /><br />
+  <input type="text" asp-for="Tags" id="tags">
+  <br />
 </div>
   <br /> <br />
     <textarea asp-for="pageContent"></textarea>
@@ -25,5 +23,16 @@
 
 <script>
 var simplemde = new SimpleMDE({ element: document.getElementById("pageContent") });
+
+
+$('#tags').tagEditor({
+    autocomplete: {
+        delay: 0, // show suggestions immediately
+        position: { collision: 'flip' }, // automatic menu position up/down
+        source: ['ActionScript', 'AppleScript', 'Asp', ... 'Python', 'Ruby']
+    },
+    forceLowercase: false,
+    placeholder: 'Programming languages ...'
+});
 </script>
 </div>
