@@ -44,11 +44,30 @@ namespace WikiCore.DB
             }
         }
 
+        internal static string LoadTags(int pageId)
+        {
+            string pageTags = "";
+            using (var db = new WikiContext())
+            {
+                var allTags = db.PageTags.Where(t => t.PageId == pageId).Select(t => t.Tag).ToList();
+
+
+                foreach (Tag tag in allTags)
+                {
+                    pageTags += tag.Name + ",";
+                }
+
+            }
+
+            return pageTags;
+        }
+
+
         private static void CreatePageTageReference(int tagId, int pageId)
         {
             using (var db = new WikiContext())
             {
-               PageTag tag = db.PageTags.Where(t => t.PageId == pageId && t.TagId == tagId).FirstOrDefault();
+                PageTag tag = db.PageTags.Where(t => t.PageId == pageId && t.TagId == tagId).FirstOrDefault();
 
                 if (tag == null)
                 {

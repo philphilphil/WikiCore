@@ -29,27 +29,9 @@ namespace WikiCore.Models
                     this.pageContent = page.Content;
                     this.Title = page.Title;
                     this.Id = page.PageId;
-                    this.Tags = LoadTags(page.PageId);
+                    this.Tags = DBService.LoadTags(page.PageId);
                 }
             }
-        }
-
-        private string LoadTags(int pageId)
-        {
-            string pageTags = "";
-            using (var db = new WikiContext())
-            {
-                var allTags = db.PageTags.Where(t => t.PageId == pageId).Select(t => t.Tag).ToList();
-
-
-                foreach (Tag tag in allTags)
-                {
-                    pageTags += tag.Name + ",";
-                }
-
-            }
-
-            return pageTags;
         }
 
         public EditModel()

@@ -42,7 +42,7 @@ namespace WikiCore.Models
             this.Title = page.Title;
             this.pageContent = CommonMark.CommonMarkConverter.Convert(page.Content);
             this.Id = page.PageId;
-            this.Tags = "asd, asdasd2,asdasd3";
+            this.Tags = DBService.LoadTags(page.PageId);
         }
 
 
