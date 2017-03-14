@@ -10,12 +10,8 @@ namespace WikiCore.Models
     {
 
         public List<Page> Pages = new List<Page>();
-
         public string CategoryName { get; set; }
-
         public int TagId { get; set; }
-
-        public List<Tag> Tags = new List<Tag>();
         public List<SelectListItem> TagsSelect = new List<SelectListItem>();
 
         public MiscModel()
@@ -23,6 +19,7 @@ namespace WikiCore.Models
             using (var db = new WikiContext())
             {
                 this.Pages = db.Pages.ToList();
+                this.TagsSelect =  db.Tags.Select(x => new SelectListItem { Value = x.TagId.ToString(),Text = x.Name }).ToList();
             }
         }
     }

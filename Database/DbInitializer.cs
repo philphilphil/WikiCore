@@ -21,14 +21,9 @@ public static class DbInitializer {
     {
         
         Tag t1 = new Tag();
-        t1.Name = "Main";
+        t1.Name = "WikiCore";
         t1.Color = 1;
         db.Tags.Add(t1);
-
-        Tag t2 = new Tag();
-        t2.Name = "Main";
-        t2.Color = 1;
-        db.Tags.Add(t2);
 
         Page p = new Page();
         p.Title = "Start";
@@ -36,9 +31,6 @@ public static class DbInitializer {
         db.Pages.Add(p);
 
         var pt = new PageTag { Tag = t1, Page = p };
-        db.PageTags.Add(pt);
-
-        pt = new PageTag { Tag = t2, Page = p };
         db.PageTags.Add(pt);
 
         db.SaveChanges();
