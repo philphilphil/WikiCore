@@ -21,7 +21,8 @@ namespace WikiCore.Controllers
         {
             int pageId = DBService.SavePage(model);
 
-            if(pageId == 0) {
+            if (pageId == 0)
+            {
                 ViewData["ErrorMessage"] = "Something went wrong adding the page..";
                 return View("Add", new EditModel());
             }
@@ -32,16 +33,11 @@ namespace WikiCore.Controllers
 
         public IActionResult Update(EditModel model)
         {
-            using (var db = new WikiContext())
-            {
-                var page = db.Pages.Where(p => p.PageId == model.Id).FirstOrDefault();
-                page.Title = model.Title;
-                page.Content = model.pageContent;
-                //  page.CategoryId = int.Parse(model.CategoryId);
-                db.SaveChanges();
 
-                return RedirectToAction("Index", "Home", new { page.PageId });
-            }
+            DBService.UpdatePage(model);
+
+            return RedirectToAction("Index", "Home", new { id = model.Id });
+
         }
     }
 }

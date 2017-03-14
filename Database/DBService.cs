@@ -26,6 +26,7 @@ namespace WikiCore.DB
             }
         }
 
+        //Delete tag and all references between page and tag
         internal static void DeleteTag(int tagId)
         {
             using (var db = new WikiContext())
@@ -40,21 +41,51 @@ namespace WikiCore.DB
             }
         }
 
+        internal static void UpdatePage(EditModel model)
+        {
+            using (var db = new WikiContext())
+            {
+                var page = db.Pages.Where(p => p.PageId == model.Id).FirstOrDefault();
+                page.Title = model.Title;
+                page.Content = model.pageContent;
+                UpdateTags(model.Id, model.Tags);
+                db.SaveChanges();
+            }
+        }
+
         //Create, Remove or add new Tags and reference them to Pages
         private static void UpdateTags(int pageId, string tags)
         {
             using (var db = new WikiContext())
             {
-                //Todo: Remove Tags that where removed in the view.
-
                 List<String> tagList = tags.Split(',').ToList();
+                List<String> currentTags = db.PageTags.Where(t => t.PageId == pageId).Select(t => t.Tag.Name).ToList();
+
+                //Get items currently referenced to the page that where removed during edit
+                List<string> removeTags = currentTags.Except(tagList).ToList();
+                foreach (string tag in removeTags)
+                {
+                    RemoveTagReference(pageId, tag);
+                }
 
                 foreach (string tag in tagList)
                 {
                     Tag dbTag = GetTag(tag);
 
-                    CreatePageTageReference(dbTag.TagId, pageId);
+                    CreatePageTagReference(dbTag.TagId, pageId);
                 }
+
+            }
+        }
+
+        private static void RemoveTagReference(int pageId, string tag)
+        {
+            using (var db = new WikiContext())
+            {
+                var tags = db.PageTags.Where(t => t.PageId == pageId && t.Tag.Name == tag).ToList();
+
+                db.PageTags.RemoveRange(tags);
+                db.SaveChanges();
 
             }
         }
@@ -75,7 +106,7 @@ namespace WikiCore.DB
         }
 
         //Check if reference between Tag and Page already exists, if not create it
-        private static void CreatePageTageReference(int tagId, int pageId)
+        private static void CreatePageTagReference(int tagId, int pageId)
         {
             using (var db = new WikiContext())
             {
