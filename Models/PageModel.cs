@@ -13,6 +13,8 @@ namespace WikiCore.Models
         //public List<LogEntry> Logs = new List<LogEntry>();
         public string pageContent { get; set; }
         public string Title { get; set; }
+
+        public string Tags { get; set; }
         public int Id { get; set; }
 
         //public List<Category> Categories = new List<Category>();
@@ -33,16 +35,6 @@ namespace WikiCore.Models
                     LoadPageData(pageOverview);
                 }
             }
-
-         //   LoadCategories();
-        }
-
-        private void LoadCategories()
-        {
-            using (var db = new WikiContext())
-            {
-               // this.Categories = db.Categories.OrderByDescending(x => x.Name).ToList();
-            }
         }
 
         private void LoadPageData(Page page)
@@ -50,6 +42,7 @@ namespace WikiCore.Models
             this.Title = page.Title;
             this.pageContent = CommonMark.CommonMarkConverter.Convert(page.Content);
             this.Id = page.PageId;
+            this.Tags = "asd, asdasd2,asdasd3";
         }
 
 

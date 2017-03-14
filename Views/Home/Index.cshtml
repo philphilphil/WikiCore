@@ -5,10 +5,9 @@
 }
 <div class="ui container">
     <h2>@Html.Raw(Model.Title)</h2>
-    <a class="ui tag label">New</a>
-<a class="ui red tag label">Upcoming</a>
-<a class="ui teal tag label">Featured</a>
+    <h6>@Html.Raw(Model.Tags)</h6>
     @Html.Raw(Model.pageContent)
     @Html.ActionLink("Edit", "Index", "Edit", new { id = Model.Id })
 </div>
+
 
