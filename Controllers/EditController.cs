@@ -26,7 +26,7 @@ namespace WikiCore.Controllers
                 return View("Add", new EditModel());
             }
 
-            return RedirectToAction("Index", "Home", new { pageId });
+            return RedirectToAction("Index", "Home", new { id = pageId });
 
         }
 
