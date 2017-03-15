@@ -7,6 +7,19 @@ namespace WikiCore.Controllers
 {
     public class EditController : Controller
     {
+        private DBService _dbs;
+        public DBService dbs
+        {
+            get
+            {
+                if (_dbs == null)
+                {
+                    _dbs = new DBService();
+                }
+                return this._dbs;
+            }
+            set { }
+        }
         public IActionResult Index(int id)
         {
             return View(new EditModel(id));
@@ -19,7 +32,7 @@ namespace WikiCore.Controllers
 
         public IActionResult Save(EditModel model)
         {
-            int pageId = DBService.SavePage(model);
+            int pageId = dbs.SavePage(model);
 
             if (pageId == 0)
             {
@@ -34,7 +47,7 @@ namespace WikiCore.Controllers
         public IActionResult Update(EditModel model)
         {
 
-            DBService.UpdatePage(model);
+            dbs.UpdatePage(model);
 
             return RedirectToAction("Index", "Home", new { id = model.Id });
 

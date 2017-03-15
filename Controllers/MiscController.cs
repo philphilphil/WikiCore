@@ -21,7 +21,8 @@ namespace WikiCore.Controllers
 
         public IActionResult DeleteTag(MiscModel m)
         {
-            DBService.DeleteTag(m.TagId);
+            var dbs = new DBService();
+            dbs.DeleteTag(m.TagId);
             return RedirectToAction("Index");
         }
     }

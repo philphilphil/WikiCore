@@ -1,9 +1,9 @@
 using System;
 using Xunit;
 
-namespace Wikicore
+namespace Tests
 {
-    public class Tests
+    public class DBServiceTest
     {
         [Fact]
         public void Test()

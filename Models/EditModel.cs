@@ -8,7 +8,19 @@ namespace WikiCore.Models
 {
     public class EditModel
     {
-
+        private DBService _dbs;
+        public DBService dbs
+        {
+            get
+            {
+                if (_dbs == null)
+                {
+                    _dbs = new DBService();
+                }
+                return this._dbs;
+            }
+            set { }
+        }
         public string pageContent { get; set; }
 
         public List<SelectListItem> Categories = new List<SelectListItem>();
@@ -22,15 +34,11 @@ namespace WikiCore.Models
         {
             using (var db = new WikiContext())
             {
-                var page = db.Pages.Where(p => p.PageId == id).FirstOrDefault();
-
-                if (page != null)
-                {
-                    this.pageContent = page.Content;
-                    this.Title = page.Title;
-                    this.Id = page.PageId;
-                    this.Tags = DBService.LoadTags(page.PageId);
-                }
+                var page = dbs.GetPageOrDefault(id);
+                this.pageContent = page.Content;
+                this.Title = page.Title;
+                this.Id = page.PageId;
+                this.Tags = dbs.LoadTags(page.PageId);
             }
         }
 

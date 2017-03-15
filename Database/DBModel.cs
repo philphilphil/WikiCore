@@ -10,6 +10,14 @@ namespace WikiCore.DB
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PageTag> PageTags { get; set; }
 
+        public WikiContext(DbContextOptions<WikiContext> options)
+        : base(options)
+        { }
+
+        public WikiContext() {
+            
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PageTag>()
@@ -25,10 +33,10 @@ namespace WikiCore.DB
                 .WithMany(t => t.PageTags)
                 .HasForeignKey(pt => pt.TagId);
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Filename=./WikiCoreDatabase.db");
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlite("Filename=./WikiCoreDatabase.db");
+        // }
     }
 
     public class Page
