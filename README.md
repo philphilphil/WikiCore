@@ -1,4 +1,4 @@
-# WikiCore - Work in Progress
+# WikiCore - Work in Progress [![Build Status](https://travis-ci.org/philphilphil/WikiCore.svg?branch=master)](https://travis-ci.org/philphilphil/WikiCore)
 Simple Wiki written in .NET Core MVC
 
 
