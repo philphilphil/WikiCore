@@ -15,7 +15,7 @@ namespace Tests
     public class SearchHelperTest
     {
         [Fact]
-        public void FindSingleItem()
+        public void FindCorrectAmountOfPages()
         {
             // Open connection to DB in memory
             var conn = new SqliteConnection("DataSource=:memory:");
@@ -29,15 +29,22 @@ namespace Tests
                 using (var context = new WikiContext(options))
                 {
                     context.Database.EnsureCreated();
-                    CreatePage("", "", "", context);
+                    CreatePage("title", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
+                    CreatePage("title2", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
+                    CreatePage("title3", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
+                    CreatePage("title4", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn NOOO vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
 
                 }
 
                 // Use a separate instance of the context to verify correct data was saved to database
                 using (var context = new WikiContext(options))
                 {
-                    Assert.Equal(1, context.Pages.Count());
-                   // Assert.AreEqual("http://sample.com", context.Blogs.Single().Url);
+                    //should find 4 items total in DB
+                    Assert.Equal(4, context.Pages.Count());
+
+                    //should find 3 items with "test" in them
+                    List<SearchResult> sr = SearchHelper.Search("test", context);
+                    Assert.Equal(3, sr.Count());
                 }
             }
             finally
@@ -50,9 +57,9 @@ namespace Tests
         {
             var dbs = new DBService(context);
             EditModel m = new EditModel();
-            m.Tags = "eins, zwei, drei, vier";
-            m.Title = "Test Page One";
-            m.pageContent = "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig";
+            m.Tags = tags;
+            m.Title = title;
+            m.pageContent = text;
             dbs.SavePage(m);
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WikiCore.DB;
 
 namespace WikiCore.SearchHelpers
@@ -9,15 +10,21 @@ namespace WikiCore.SearchHelpers
     {
 
         private const int descriptionWidth = 30;
+
         public static List<SearchResult> Search(string searchText)
+        {
+            //TODO: fix context or move to service
+            var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
+            using (WikiContext db = new WikiContext(options))
+            {
+                return Search(searchText, db);
+            }
+        }
+        public static List<SearchResult> Search(string searchText, WikiContext db)
         {
             List<SearchResult> result = new List<SearchResult>();
 
-            List<Page> pagesFound;
-            using (var db = new WikiContext())
-            {
-                pagesFound = db.Pages.Where(x => x.Content.ToLower().Contains(searchText) || x.Title.ToLower().Contains(searchText)).ToList();
-            }
+            List<Page> pagesFound = db.Pages.Where(x => x.Content.ToLower().Contains(searchText) || x.Title.ToLower().Contains(searchText)).ToList();
 
             foreach (Page item in pagesFound)
             {
@@ -30,7 +37,7 @@ namespace WikiCore.SearchHelpers
         private static string GetDescription(string searchText, string content)
         {
             int indexOfsearchText = content.IndexOf(searchText);
-            content = content.Replace("\r","").Replace("\n","");
+            content = content.Replace("\r", "").Replace("\n", "");
 
             //If there is les than descriptionWidth-characters infront of the foundText, display from the start
             int startIndex;

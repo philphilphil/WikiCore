@@ -21,6 +21,7 @@ namespace WikiCore.Controllers
 
         public JsonResult Search(string text)
         {
+            
             var results = SearchHelper.Search(text.ToLower());
             //Build correct object for semantic-ui search box
             var searchResults = new
