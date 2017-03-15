@@ -7,6 +7,8 @@ branches:
   only:
     - master
 before_script:
-  - chmod a+x ./build_travis.sh
+  - chmod a+x ./travis_build.sh
+  - chmod a+x ./travis_test.sh
 script:
-  - ./build_travis.sh
+  - ./travis_build.sh
+  - ./travis_test.sh
