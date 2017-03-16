@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using WikiCore.DB;
 using WikiCore.Models;
-using WikiCore.SearchHelpers;
+using WikiCore.Helpers;
 using Xunit;
 
 namespace Tests

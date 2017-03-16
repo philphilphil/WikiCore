@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WikiCore.DB;
 
-namespace WikiCore.SearchHelpers
+namespace WikiCore.Helpers
 {
     public static class SearchHelper
     {
