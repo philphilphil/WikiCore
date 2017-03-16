@@ -40,7 +40,7 @@ namespace WikiCore.Controllers
                 return View("Add", new EditModel());
             }
 
-            return RedirectToAction("Index", "Home", new { id = pageId });
+            return RedirectToRoute("Page", new { id = pageId });
 
         }
 
@@ -49,7 +49,7 @@ namespace WikiCore.Controllers
 
             dbs.UpdatePage(model);
 
-            return RedirectToAction("Index", "Home", new { id = model.Id });
+            return RedirectToRoute("Page", new { id = model.Id });
 
         }
     }

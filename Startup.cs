@@ -61,11 +61,14 @@ namespace WikiCore
                     template: "Add",
                     defaults: new { controller = "Edit", action = "Add" }
                     );
-
+               
                 routes.MapRoute(
-                        name: "edit",
-                        template: "{controller=Edit}/{action=Index}/{id?}");
-             
+                        "Edit",
+                        "Edit/{id}",
+                        new {controller="Edit", action="Index"},
+                        new {id = @"\d*" }
+                    );
+
                 routes.MapRoute(
                         "Tag",
                         "Tag/{name}",

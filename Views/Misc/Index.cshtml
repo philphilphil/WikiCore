@@ -19,6 +19,6 @@ Tag will be deleted and removed from all pages.
 <h2>All pages:</h2>
  @foreach (var page in Model.Pages) {
      <p>      
-        @Html.ActionLink(page.Title, "Index", "Home", new { id = page.PageId })
+        @Html.RouteLink(page.Title, "Page", new { id = page.PageId })
      </p>
  }
