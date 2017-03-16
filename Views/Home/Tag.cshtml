@@ -1,8 +1,10 @@
 @model WikiCore.Models.TagOverviewModel
 
 @{
-    
+    ViewData["Title"] = Model.Tag.Name;
 }
+<h2>Tag: @ViewData["Title"]</h2>
+
  @foreach (var page in Model.Pages) {
      <p>      
         @Html.ActionLink(page.Title, "Index", "Home", new { id = page.PageId })

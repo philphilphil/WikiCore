@@ -25,16 +25,15 @@ namespace WikiCore.Models
         public List<Page> Pages = new List<Page>();
         public TagOverviewModel(string tagname)
         {
-            //Move to db service
             Tag tag = dbs.GetTagByName(tagname.ToLower());
 
             if (tag != null) {
                 this.Tag = tag;
-            } else {
-                
+                this.Pages = dbs.GetPagesWithTag(tag);
+            }else {
+                //Not the best errorhandling, fix later
+                this.Tag = new Tag { Name = "Not found."};
             }
-
-            this.Pages = dbs.GetPagesWithTag(tag);
         }
     }
 }
