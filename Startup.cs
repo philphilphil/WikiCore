@@ -55,9 +55,30 @@ namespace WikiCore
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                    routes.MapRoute(
-                    name: "edit",
-                    template: "{controller=Edit}/{action=Index}/{id?}");
+                
+                routes.MapRoute(
+                    name: "add",
+                    template: "Add",
+                    defaults: new { controller = "Edit", action = "Add" }
+                    );
+
+                routes.MapRoute(
+                        name: "edit",
+                        template: "{controller=Edit}/{action=Index}/{id?}");
+             
+                routes.MapRoute(
+                        "Tag",
+                        "Tag/{name}",
+                        new {controller="Home", action="Tag"},
+                        new {name = @"\w+" }
+                    );
+
+                routes.MapRoute(
+                        "Page",
+                        "Page/{id}",
+                        new {controller="Home", action="Index"},
+                        new {id = @"\d*" }
+                    );
             });
 
             DbInitializer.InitializeDb();

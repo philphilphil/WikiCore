@@ -38,21 +38,43 @@ namespace WikiCore.DB
             return page.PageId;
         }
 
-        internal Page GetPageOrDefault(int id)
+        public List<Tag> GetAllTags()
+        {
+            return db.Tags.ToList();
+        }
+
+        public List<Page> GetPagesWithTag(Tag tag)
+        {
+            var tagRef = db.PageTags.Where(x => x.Tag == tag).Select(p => p.PageId).ToList();
+
+            return db.Pages.Where(x => tagRef.Contains(x.PageId)).ToList();
+        }
+
+        public List<Page> GetAllPages()
+        {
+            return db.Pages.ToList();
+        }
+
+        public Tag GetTagByName(string tagname)
+        {
+            return db.Tags.Where(x => x.Name.ToLower() == tagname).FirstOrDefault();
+        }
+
+        public Page GetPageOrDefault(int id)
         {
             Page page = db.Pages.Where(p => p.PageId == id).FirstOrDefault();
 
             //If not found get default
             if (page == null)
             {
-                page =  db.Pages.Where(p => p.PageId == 1).FirstOrDefault();
+                page = db.Pages.Where(p => p.PageId == 1).FirstOrDefault();
             }
 
             return page;
         }
 
         //Delete tag and all references between page and tag
-        internal void DeleteTag(int tagId)
+        public void DeleteTag(int tagId)
         {
             var tag = db.Tags.Where(t => t.TagId == tagId).FirstOrDefault();
             db.Tags.Remove(tag);

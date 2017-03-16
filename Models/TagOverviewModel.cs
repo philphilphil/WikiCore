@@ -6,8 +6,7 @@ using WikiCore.DB;
 
 namespace WikiCore.Models
 {
-
-    public class MiscModel
+    public class TagOverviewModel
     {
         private DBService _dbs;
         public DBService dbs
@@ -22,15 +21,20 @@ namespace WikiCore.Models
             }
             set { }
         }
+        public Tag Tag { get; set; }
         public List<Page> Pages = new List<Page>();
-        public string CategoryName { get; set; }
-        public int TagId { get; set; }
-        public List<SelectListItem> TagsSelect = new List<SelectListItem>();
-
-        public MiscModel()
+        public TagOverviewModel(string tagname)
         {
-            this.Pages = dbs.GetAllPages();
-            this.TagsSelect =  dbs.GetAllTags().Select(x => new SelectListItem { Value = x.TagId.ToString(),Text = x.Name }).ToList();
+            //Move to db service
+            Tag tag = dbs.GetTagByName(tagname.ToLower());
+
+            if (tag != null) {
+                this.Tag = tag;
+            } else {
+                
+            }
+
+            this.Pages = dbs.GetPagesWithTag(tag);
         }
     }
 }

@@ -14,6 +14,13 @@ namespace WikiCore.Controllers
             return View(m);
         }
 
+        //Tags with name for pretty links
+        public IActionResult Tag(string name)
+        {
+            TagOverviewModel t = new TagOverviewModel(name);
+            return View(t);
+        }
+
         public IActionResult Error()
         {
             return View();
@@ -21,7 +28,7 @@ namespace WikiCore.Controllers
 
         public JsonResult Search(string text)
         {
-            
+
             var results = SearchHelper.Search(text.ToLower());
             //Build correct object for semantic-ui search box
             var searchResults = new
