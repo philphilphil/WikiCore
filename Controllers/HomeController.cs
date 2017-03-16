@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WikiCore.Models;
-using WikiCore.SearchHelpers;
+using WikiCore.Helpers;
 using WikiCore.DB;
 
 namespace WikiCore.Controllers
@@ -17,8 +17,14 @@ namespace WikiCore.Controllers
         //Tags with name for pretty links
         public IActionResult Tag(string name)
         {
-            TagOverviewModel t = new TagOverviewModel(name);
+            var t = new TagOverviewModel(name);
             return View(t);
+        }
+
+        public IActionResult Cloud(string name)
+        {
+            var c = new CloudModel();
+            return View(c);
         }
 
         public IActionResult Error()

@@ -1,0 +1,15 @@
+@model WikiCore.Models.CloudModel
+@{
+    ViewData["Title"] = "Tagcloud";
+}
+
+<div class="ui container">
+<h2>@ViewData["Title"]</h2>
+<div id="cloud" style="width: 550px; height: 350px; position: relative;"></div>
+
+<script>
+var words = @Html.Raw(Model.TagCloudJson);
+
+$('#cloud').jQCloud(words);
+</script>
+</div>

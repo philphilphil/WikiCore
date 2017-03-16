@@ -82,6 +82,12 @@ namespace WikiCore
                         new {controller="Home", action="Index"},
                         new {id = @"\d*" }
                     );
+
+                 routes.MapRoute(
+                        "Cloud",
+                        "Cloud",
+                        new {controller="Home", action="Cloud"}
+                    );
             });
 
             DbInitializer.InitializeDb();

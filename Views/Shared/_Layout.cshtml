@@ -13,6 +13,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.3.min.js"></script>
     <script src="~/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link rel="stylesheet" href="~/lib/jqcloud2/jqcloud.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script src="~/lib/jQuery-tagEditor/jquery.tag-editor.min.js"> </script>
     <script src="~/lib/jQuery-tagEditor/jquery.caret.min.js"> </script>
@@ -29,6 +30,7 @@
             </a>
             <a href="/" class="header item">WikiCore</a>
             <menulink class="blue item" asp-area="" controller-name="Home" action-name="Index" menu-text="Start"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
             <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
             <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
             <div class="ui category search">
@@ -44,6 +46,7 @@
     <!-- Sidebar Menu -->
     <div class="ui vertical inverted sidebar menu">
         <menulink class="blue item" asp-area="" controller-name="Home" action-name="Index" menu-text="Start"></menulink>
+        <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
         <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
         <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
 
