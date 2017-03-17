@@ -38,6 +38,17 @@ namespace WikiCore.DB
             return page.PageId;
         }
 
+        public void DeletePage(int id)
+        {
+            var page = db.Pages.Where(p => p.PageId == id).FirstOrDefault();
+            db.Pages.Remove(page);
+
+            var tags = db.PageTags.Where(t => t.PageId == id).ToList();
+            db.PageTags.RemoveRange(tags);
+            
+            db.SaveChanges();
+        }
+
         public List<Tag> GetAllTags()
         {
             return db.Tags.ToList();

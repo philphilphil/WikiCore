@@ -25,6 +25,19 @@ namespace WikiCore.Controllers
             return View(new EditModel(id));
         }
 
+        public IActionResult Delete(int id)
+        {
+            if(id == 1) {
+                ViewData["ErrorMessage"] = "Can't delete first page";
+                return View("Index", new EditModel(id));
+            }
+
+            dbs.DeletePage(id);
+
+            //Redirect to first page
+            return RedirectToRoute("Page", new { id = 1 });
+        }
+
         public IActionResult Add()
         {
             return View(new EditModel());
