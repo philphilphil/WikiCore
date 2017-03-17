@@ -39,10 +39,23 @@ namespace WikiCore.Models
             this.Title = page.Title;
             this.Id = page.PageId;
             this.Tags = dbs.LoadTagsForPage(page.PageId);
+
+            LoadTagsForAutocomplete();
+        }
+
+        private void LoadTagsForAutocomplete()
+        {
+            var allTags = dbs.GetAllTags().Select(t => t.Name);
+            
+            foreach(var t in allTags) {
+                this.AllTags += "'" + t + "',";
+            }
+
         }
 
         public EditModel()
         {
+             LoadTagsForAutocomplete();
         }
     }
 }
