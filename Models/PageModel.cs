@@ -47,7 +47,7 @@ namespace WikiCore.Models
             this.Title = page.Title;
             this.pageContent = CommonMark.CommonMarkConverter.Convert(page.Content);
             this.Id = page.PageId;
-            this.Tags = dbs.LoadTags(page.PageId);
+            this.Tags = dbs.LoadTagsForPage(page.PageId);
         }
 
 

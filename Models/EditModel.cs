@@ -27,19 +27,18 @@ namespace WikiCore.Models
 
         public string Tags { get; set; }
 
+        public string AllTags { get; set; }
+
         public string Title { get; set; }
 
         public int Id { get; set; }
         public EditModel(int id)
         {
-            using (var db = new WikiContext())
-            {
-                var page = dbs.GetPageOrDefault(id);
-                this.pageContent = page.Content;
-                this.Title = page.Title;
-                this.Id = page.PageId;
-                this.Tags = dbs.LoadTags(page.PageId);
-            }
+            var page = dbs.GetPageOrDefault(id);
+            this.pageContent = page.Content;
+            this.Title = page.Title;
+            this.Id = page.PageId;
+            this.Tags = dbs.LoadTagsForPage(page.PageId);
         }
 
         public EditModel()

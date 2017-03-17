@@ -45,7 +45,7 @@ namespace WikiCore.DB
 
             var tags = db.PageTags.Where(t => t.PageId == id).ToList();
             db.PageTags.RemoveRange(tags);
-            
+
             db.SaveChanges();
         }
 
@@ -135,7 +135,7 @@ namespace WikiCore.DB
         }
 
         // Get all tags for the given page as comma seperated string for the jQuery-TagEditor
-        internal string LoadTags(int pageId)
+        internal string LoadTagsForPage(int pageId)
         {
             string pageTags = "";
 
