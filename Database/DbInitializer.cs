@@ -29,7 +29,7 @@ public static class DbInitializer {
 
         Page p = new Page();
         p.Title = "Start";
-        p.Content = "Welcome to __WikiCore__. Some Text will be added here explaining how WikiCore works.";
+        p.Content = "Welcome to __WikiCore__.\r\n\r\nWikiCore is a modest, small and fast Wiki featuring [MarkDown](https://daringfireball.net/projects/markdown/) editing.\r\n\r\nUnlike regular Wikis pages are organized with tags.\r\n\r\nPlease report Bugs in a [GitHub-Issue](https://github.com/philphilphil/WikiCore/issues).";
         db.Pages.Add(p);
 
         var pt = new PageTag { Tag = t1, Page = p };
