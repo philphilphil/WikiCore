@@ -14,53 +14,44 @@ namespace Tests
 {
     public class SearchHelperTest
     {
-        [Fact]
-        public void FindCorrectAmountOfPages()
+        private WikiContext context { get; set; }
+
+        public SearchHelperTest()
         {
-            // Open connection to DB in memory
             var conn = new SqliteConnection("DataSource=:memory:");
             conn.Open();
+            var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite(conn).Options;
+            var context = new WikiContext(options);
+            context.Database.EnsureCreated();
+            this.context = context;
 
-            try
-            {
-                var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite(conn).Options;
-
-                // Create DB, add sample entries
-                using (var context = new WikiContext(options))
-                {
-                    context.Database.EnsureCreated();
-                    CreatePage("title", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
-                    CreatePage("title2", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
-                    CreatePage("title3", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn test vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
-                    CreatePage("title4", "eins zwei drei vier fuenf sechs sieben acht neun zehn elf zwoelf dreizehn NOOO vierzehn fuenfzehn sechzehn siebzehn achtzehn neunzehn zwanzig", "eins, zwei, drei, vier", context);
-
-                }
-
-                // Use a separate instance of the context to verify correct data was saved to database
-                using (var context = new WikiContext(options))
-                {
-                    //should find 4 items total in DB
-                    Assert.Equal(4, context.Pages.Count());
-
-                    //should find 3 items with "test" in them
-                    List<SearchResult> sr = SearchHelper.Search("test", context);
-                    Assert.Equal(3, sr.Count());
-                }
-            }
-            finally
-            {
-                conn.Close();
-            }
+            TestDataCreator.CreateFourPagesWithTags(context);
         }
 
-        private void CreatePage(string title, string text, string tags, WikiContext context)
+        [Fact]
+        public void FindCorrectAmountOfPagesInSearch()
         {
-            var dbs = new DBService(context);
-            EditModel m = new EditModel();
-            m.Tags = tags;
-            m.Title = title;
-            m.pageContent = text;
-            dbs.SavePage(m);
+            //should find 3 items with "test" in them
+            List<SearchResult> sr = SearchHelper.Search("test", context);
+            Assert.Equal(3, sr.Count());
+
+            //should find no item with "NONE" in them
+            List<SearchResult> sr2 = SearchHelper.Search("NONE", context);
+            Assert.Equal(0, sr2.Count());
+
+            //should find 3 item with "tes" in them
+            List<SearchResult> sr3 = SearchHelper.Search("tes", context);
+            Assert.Equal(3, sr3.Count());
+        }
+
+        [Fact]
+        public void DescriptionCorrect()
+        {
+            //should find the correct description for the found item
+            SearchResult sr = SearchHelper.Search("test", context)[0];
+
+            //description should be correct amount of characters 30 in each direction + 4 for "test"
+            Assert.Equal(64, sr.description.Length);
         }
     }
 }
