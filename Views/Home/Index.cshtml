@@ -1,7 +1,7 @@
 @model WikiCore.Models.PageModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = Model.Title;
 }
 <div class="ui container">
     <h2>@Html.Raw(Model.Title)</h2>
