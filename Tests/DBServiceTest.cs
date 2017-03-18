@@ -22,6 +22,7 @@ namespace Tests
             conn.Open();
             var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite(conn).Options;
             var context = new WikiContext(options);
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             this.context = context;
 
@@ -62,7 +63,7 @@ namespace Tests
             EditModel em = new EditModel();
             em.Id = 1;
             em.pageContent = "empty";
-            em.Tags = "eins, zwei, drei, vier";
+            em.Tags = "eins,zwei,drei,vier";
             em.Title = "tit";
 
             DBService dbs = new DBService(context);
@@ -81,14 +82,14 @@ namespace Tests
             EditModel em = new EditModel();
             em.Id = 2;
             em.pageContent = "empty";
-            em.Tags = "eins, zwei, drei";
+            em.Tags = "eins,zwei,drei";
             em.Title = "tit";
 
             DBService dbs = new DBService(context);
             dbs.UpdatePage(em);
 
             //should still find 4 tags in total (other references)
-            Assert.Equal(4, dbs.GetAllTags().Count());
+            Assert.Equal(4, context.Tags.Count());
 
             //should find 3 tags total for page 2
             int refCount = context.PageTags.Where(p => p.PageId == 2).Count();
@@ -101,7 +102,7 @@ namespace Tests
             EditModel em = new EditModel();
             em.Id = 2;
             em.pageContent = "empty";
-            em.Tags = "eins, zwei, drei, vier, fuenf, sechs";
+            em.Tags = "eins,zwei,drei,vier,fuenf,sechs";
             em.Title = "tit";
 
             DBService dbs = new DBService(context);
