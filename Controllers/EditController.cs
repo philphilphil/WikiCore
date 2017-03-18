@@ -40,7 +40,7 @@ namespace WikiCore.Controllers
 
         public IActionResult Add()
         {
-            return View(new EditModel());
+            return View(new EditModel(true));
         }
 
         public IActionResult Save(EditModel model)
@@ -50,7 +50,7 @@ namespace WikiCore.Controllers
             if (pageId == 0)
             {
                 ViewData["ErrorMessage"] = "Something went wrong adding the page..";
-                return View("Add", new EditModel());
+                return View("Add", new EditModel(true));
             }
 
             return RedirectToRoute("Page", new { id = pageId });

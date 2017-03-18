@@ -60,7 +60,7 @@ namespace Tests
         [Fact]
         public void OnePageUpdated()
         {
-            EditModel em = new EditModel();
+            EditModel em = new EditModel(false);
             em.Id = 1;
             em.pageContent = "empty";
             em.Tags = "eins,zwei,drei,vier";
@@ -79,7 +79,7 @@ namespace Tests
         [Fact]
         public void OneTagDeletedFromPage()
         {
-            EditModel em = new EditModel();
+            EditModel em = new EditModel(false);
             em.Id = 2;
             em.pageContent = "empty";
             em.Tags = "eins,zwei,drei";
@@ -99,7 +99,7 @@ namespace Tests
         [Fact]
         public void TwoTagsAddedToPage()
         {
-            EditModel em = new EditModel();
+            EditModel em = new EditModel(false);
             em.Id = 2;
             em.pageContent = "empty";
             em.Tags = "eins,zwei,drei,vier,fuenf,sechs";

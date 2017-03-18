@@ -46,16 +46,21 @@ namespace WikiCore.Models
         private void LoadTagsForAutocomplete()
         {
             var allTags = dbs.GetAllTags().Select(t => t.Name);
-            
-            foreach(var t in allTags) {
+
+            foreach (var t in allTags)
+            {
                 this.AllTags += "'" + t + "',";
             }
 
         }
 
-        public EditModel()
+        public EditModel(bool loadTags)
         {
-             LoadTagsForAutocomplete();
+            if (loadTags)
+            {
+                LoadTagsForAutocomplete();
+            }
+
         }
     }
 }
