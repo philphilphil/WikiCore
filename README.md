@@ -4,7 +4,7 @@ WikiCore is a modest, small and fast Wiki featuring [MarkDown](https://daringfir
 Unlike regular Wikis pages are organized with tags.
 
 Latest Stable release: [v1.0](https://github.com/philphilphil/WikiCore/releases)
-![WikiCoreScreenshot](http://i.imgur.com/l0zdhWg.png)
+![WikiCoreScreenshot](http://i.imgur.com/kBMcgIJ.png)
 ## Setup
 Install [.NET Core CLI](https://www.microsoft.com/net/core#windowsvs2015) for your OS.
 Restore the packages used, generate Database (SQLite) with EntityFramework and run.
