@@ -60,7 +60,9 @@ namespace WikiCore.Models
             {
                 LoadTagsForAutocomplete();
             }
+        }
 
+        public EditModel() {
         }
     }
 }
