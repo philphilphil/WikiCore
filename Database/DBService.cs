@@ -108,7 +108,15 @@ namespace WikiCore.DB
         //Create, Remove or add new Tags and reference them to Pages
         private void UpdateTags(int pageId, string tags)
         {
-            List<String> tagList = tags.Split(',').ToList();
+            List<String> tagList;
+            if (string.IsNullOrEmpty(tags))
+            {
+                tagList = new List<String>();
+            }
+            else
+            {
+                tagList = tags.Split(',').ToList();
+            }
             List<String> currentTags = db.PageTags.Where(t => t.PageId == pageId).Select(t => t.Tag.Name).ToList();
 
             //Get items currently referenced to the page that where removed during edit
