@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using WikiCore.Models;
 using WikiCore.DB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WikiCore.Controllers
 {
     public class MiscController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             return View(new MiscModel());
@@ -19,6 +21,7 @@ namespace WikiCore.Controllers
             return View("Index", new MiscModel());
         }
 
+        [Authorize]
         public IActionResult DeleteTag(MiscModel m)
         {
             var dbs = new DBService();

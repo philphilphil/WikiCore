@@ -21,11 +21,13 @@ namespace WikiCore.Controllers
             }
             set { }
         }
+        [Authorize]
         public IActionResult Index(int id)
         {
             return View(new EditModel(id));
         }
 
+        [Authorize]
         public IActionResult Delete(int id)
         {
             if(id == 1) {
@@ -45,6 +47,7 @@ namespace WikiCore.Controllers
             return View(new EditModel(true));
         }
 
+        [Authorize]
         public IActionResult Save(EditModel model)
         {
             int pageId = dbs.SavePage(model);
@@ -59,6 +62,7 @@ namespace WikiCore.Controllers
 
         }
 
+        [Authorize]
         public IActionResult Update(EditModel model)
         {
 

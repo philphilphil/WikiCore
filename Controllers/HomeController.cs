@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using WikiCore.Models;
 using WikiCore.Helpers;
 using WikiCore.DB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WikiCore.Controllers
 {
@@ -15,12 +16,14 @@ namespace WikiCore.Controllers
         }
 
         //Tags with name for pretty links
+        [Authorize]
         public IActionResult Tag(string name)
         {
             var t = new TagOverviewModel(name);
             return View(t);
         }
 
+        [Authorize]
         public IActionResult Cloud(string name)
         {
             var c = new CloudModel();
@@ -32,6 +35,7 @@ namespace WikiCore.Controllers
             return View();
         }
 
+        [Authorize]
         public JsonResult Search(string text)
         {
 
