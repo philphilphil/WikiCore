@@ -1,3 +1,6 @@
+@using System.Security.Principal
+
+
 <!doctype html>
 <html lang="">
 <head>
@@ -29,26 +32,37 @@
                 <span class="sr-only">Toggle Navigation</span>
             </a>
             <a href="/" class="header item">WikiCore</a>
-            <menulink class="blue item" asp-area="" controller-name="Home" action-name="Index" menu-text="Start"></menulink>
-            <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
-            <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
-            <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
-            <div class="ui category search">
-                <div class="ui icon input">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="prompt" type="text" placeholder="Search...">
-                <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-            </div>    
+            @if (User.Identity.IsAuthenticated) {
+                <menulink class="blue item" asp-area="" controller-name="Home" action-name="Index" menu-text="Start"></menulink>
+                <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
+                <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
+                <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
+                <menulink class="blue item" asp-area="" controller-name="Account" action-name="Logout" menu-text="Logout"></menulink>
+                <div class="ui category search">
+                    <div class="ui icon input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="prompt" type="text" placeholder="Search...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+                </div>    
+            } else {
+                  <menulink class="blue item" asp-area="" controller-name="Account" action-name="Login" menu-text="Login"></menulink>
+                  <menulink class="blue item" asp-area="" controller-name="Account" action-name="Register" menu-text="Register"></menulink>
+            }
         </div>
     </div>
 
     <!-- Sidebar Menu -->
     <div class="ui vertical inverted sidebar menu">
-        <menulink class="blue item" asp-area="" controller-name="Home" action-name="Index" menu-text="Start"></menulink>
-        <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
-        <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
-        <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
+        @if (User.Identity.IsAuthenticated) {
+            <menulink class="blue item" asp-area="" controller-name="Home" action-name="Index" menu-text="Start"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
+        } else {
+            <menulink class="blue item" asp-area="" controller-name="Account" action-name="Login" menu-text="Login"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Account" action-name="Register" menu-text="Register"></menulink>
+        }
 
     </div>
 
