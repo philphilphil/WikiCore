@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using WikiCore.Models;
 
 namespace WikiCore.DB
 {
-    public class WikiContext : DbContext
+    public class WikiContext : IdentityDbContext
     {
         public DbSet<Page> Pages { get; set; }
         public DbSet<Tag> Tags { get; set; }
@@ -14,12 +16,14 @@ namespace WikiCore.DB
         : base(options)
         { }
 
-        public WikiContext() {
-            
+        public WikiContext()
+        {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<PageTag>()
                  .HasKey(t => new { t.PageId, t.TagId });
 
@@ -33,10 +37,6 @@ namespace WikiCore.DB
                 .WithMany(t => t.PageTags)
                 .HasForeignKey(pt => pt.TagId);
         }
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlite("Filename=./WikiCoreDatabase.db");
-        // }
     }
 
     public class Page
