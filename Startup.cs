@@ -121,6 +121,24 @@ namespace WikiCore
                        "Cloud",
                        new { controller = "Home", action = "Cloud" }
                    );
+
+                routes.MapRoute(
+                        "Login",
+                        "Login",
+                        new { controller = "Account", action = "Login" }
+                    );
+
+                routes.MapRoute(
+                        "Logout",
+                        "Logout",
+                        new { controller = "Account", action = "Logout" }
+                    );
+
+                routes.MapRoute(
+                        "Register",
+                        "Register",
+                        new { controller = "Account", action = "Register" }
+                    );
             });
 
             DbInitializer.InitializeDb();

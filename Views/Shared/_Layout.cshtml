@@ -37,7 +37,7 @@
                 <menulink class="blue item" asp-area="" controller-name="Cloud" action-name="Index" menu-text="Tag Cloud"></menulink>
                 <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
                 <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
-                <menulink class="blue item" asp-area="" controller-name="Account" action-name="Logout" menu-text="Logout"></menulink>
+                <menulink class="blue item" asp-area="" controller-name="Logout" action-name="Index" menu-text="Logout"></menulink>
                 <div class="ui category search">
                     <div class="ui icon input">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="prompt" type="text" placeholder="Search...">
@@ -46,8 +46,8 @@
                 <div class="results"></div>
                 </div>    
             } else {
-                  <menulink class="blue item" asp-area="" controller-name="Account" action-name="Login" menu-text="Login"></menulink>
-                  <menulink class="blue item" asp-area="" controller-name="Account" action-name="Register" menu-text="Register"></menulink>
+                  <menulink class="blue item" asp-area="" controller-name="Login" action-name="Index" menu-text="Login"></menulink>
+                  <menulink class="blue item" asp-area="" controller-name="Register" action-name="Index" menu-text="Register"></menulink>
             }
         </div>
     </div>
@@ -60,8 +60,8 @@
             <menulink class="blue item" asp-area="" controller-name="Add" action-name="Index" menu-text="Add Page"></menulink>
             <menulink class="blue item" asp-area="" controller-name="Misc" action-name="Index" menu-text="Misc"></menulink>
         } else {
-            <menulink class="blue item" asp-area="" controller-name="Account" action-name="Login" menu-text="Login"></menulink>
-            <menulink class="blue item" asp-area="" controller-name="Account" action-name="Register" menu-text="Register"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Login" action-name="Index" menu-text="Login"></menulink>
+            <menulink class="blue item" asp-area="" controller-name="Register" action-name="Index" menu-text="Register"></menulink>
         }
 
     </div>
