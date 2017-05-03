@@ -3,13 +3,25 @@ using WikiCore.Models;
 using WikiCore.Helpers;
 using WikiCore.DB;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace WikiCore.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public HomeController(SignInManager<IdentityUser> signInManager)
+        {
+            this._signInManager = signInManager;
+        }
+
         public IActionResult Index(int id)
         {
+            if (!this._signInManager.IsSignedIn(User))
+            {
+                id = 1;
+            }
             PageModel m = new PageModel(id);
 
             return View(m);
