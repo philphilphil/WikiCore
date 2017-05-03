@@ -64,6 +64,14 @@
                     </div>
                     <p>@ViewData["ErrorMessage"]
                     </p></div>
+                }else if(@ViewData["SuccessMessage"] != null) {
+                    <div class="ui positive message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Success
+                    </div>
+                    <p>@ViewData["SuccessMessage"]</p>
+                    </div>
                 }
             }
             @RenderBody()

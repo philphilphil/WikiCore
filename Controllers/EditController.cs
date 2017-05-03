@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WikiCore.Models;
 using WikiCore.DB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WikiCore.Controllers
 {
@@ -38,6 +39,7 @@ namespace WikiCore.Controllers
             return RedirectToRoute("Page", new { id = 1 });
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return View(new EditModel(true));

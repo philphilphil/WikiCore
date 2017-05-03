@@ -1,0 +1,23 @@
+<h1>Register</h1>
+<div asp-validation-summary="All" class="ui error message"></div>
+
+<form method="POST" class="ui form">
+    <div class="field">
+        <label>Username</label>
+        <input type="text" name="username"/>
+    </div>
+
+    <div class="field">
+        <label>Password</label>
+        <div class="two fields">
+        <div class="field">
+            <input type="password" name="password" placeholder="Password">
+        </div>
+        <div class="field">
+            <input type="password" name="repassword" placeholder="Retype password..">
+        </div>
+        </div>
+    </div>
+
+    <input class="ui submit button" type="submit"/>
+</form>

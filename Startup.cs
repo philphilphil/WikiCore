@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WikiCore.DB;
 
 namespace WikiCore
 {
@@ -29,6 +32,35 @@ namespace WikiCore
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddDbContext<WikiContext>(options => options.UseSqlite("Filename=./WikiCoreDatabase.db"));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<WikiContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+                {
+                    // Password settings
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+
+                    // Lockout settings
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                    options.Lockout.MaxFailedAccessAttempts = 10;
+
+                    // Cookie settings
+                    options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+                    options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+                    options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOut";
+
+                    // User settings
+                    options.User.RequireUniqueEmail = false;
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +80,7 @@ namespace WikiCore
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseIdentity();
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -55,39 +88,39 @@ namespace WikiCore
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                
+
                 routes.MapRoute(
                     name: "add",
                     template: "Add",
                     defaults: new { controller = "Edit", action = "Add" }
                     );
-               
+
                 routes.MapRoute(
                         "Edit",
                         "Edit/{id}",
-                        new {controller="Edit", action="Index"},
-                        new {id = @"\d*" }
+                        new { controller = "Edit", action = "Index" },
+                        new { id = @"\d*" }
                     );
 
                 routes.MapRoute(
                         "Tag",
                         "Tag/{name}",
-                        new {controller="Home", action="Tag"},
-                        new {name = @"\w+" }
+                        new { controller = "Home", action = "Tag" },
+                        new { name = @"\w+" }
                     );
 
                 routes.MapRoute(
                         "Page",
                         "Page/{id}",
-                        new {controller="Home", action="Index"},
-                        new {id = @"\d*" }
+                        new { controller = "Home", action = "Index" },
+                        new { id = @"\d*" }
                     );
 
-                 routes.MapRoute(
-                        "Cloud",
-                        "Cloud",
-                        new {controller="Home", action="Cloud"}
-                    );
+                routes.MapRoute(
+                       "Cloud",
+                       "Cloud",
+                       new { controller = "Home", action = "Cloud" }
+                   );
             });
 
             DbInitializer.InitializeDb();
