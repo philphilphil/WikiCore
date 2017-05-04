@@ -17,14 +17,14 @@ namespace WikiCore.TagHelpers
     /// If the current route is matched the given &lt;menulink&gt; will be active. This was added to demonstrate how a TagHelper might be used
     /// with Semantic UI to implement a simple menu.
     /// </summary>
-    [HtmlTargetElement("menulink", Attributes = "controller-name, action-name, menu-text, link-name")]
+    [HtmlTargetElement("menulink", Attributes = "controller-name, action-name, menu-text, link-name, icon-name")]
     public class MenuLinkTagHelper : TagHelper
     {
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
         public string MenuText { get; set; }
         public string LinkName { get; set; }
-
+	public string IconName { get; set; }
 
         [ViewContext]
         public ViewContext ViewContext { get; set; }
@@ -38,7 +38,7 @@ namespace WikiCore.TagHelpers
             output.TagName = "a";
             output.Attributes.Add("href", $"{menuUrl}");
             output.Attributes.Add("class", "item blue");
-            output.Content.SetContent(MenuText);
+	    output.Content.SetHtmlContent($"<i class='{IconName} icon'></i> {MenuText}");
 
             var routeData = ViewContext.RouteData.Values;
             var currentController = routeData["controller"] + "/" + routeData["action"];
