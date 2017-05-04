@@ -25,6 +25,9 @@ namespace WikiCore.Models
         public List<Page> Pages = new List<Page>();
         public string CategoryName { get; set; }
         public int TagId { get; set; }
+        public bool DisableRegistration { get; set; }
+        public string SiteTitle { get; set; }
+        
         public List<SelectListItem> TagsSelect = new List<SelectListItem>();
 
         public MiscModel()
