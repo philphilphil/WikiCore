@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-dotnet restore  --infer-runtimes && dotnet build
+dotnet restore && dotnet build
