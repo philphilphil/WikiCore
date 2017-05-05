@@ -6,6 +6,8 @@ dotnet: 1.0.1
 branches:
   only:
     - master
+before_script:
+  - cd src
 script:
   - dotnet restore && dotnet build
   - dotnet test
