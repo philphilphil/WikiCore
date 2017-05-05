@@ -6,9 +6,6 @@ dotnet: 1.0.1
 branches:
   only:
     - master
-before_script:
-  - chmod a+x ./travis_build.sh
-  - chmod a+x ./travis_test.sh
 script:
-  - ./travis_build.sh
-  - ./travis_test.sh
+  - dotnet restore && dotnet build
+  - dotnet test
