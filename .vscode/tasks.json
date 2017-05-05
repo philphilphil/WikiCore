@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}\\project.json"
+                "${workspaceRoot}/WikiCore.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
