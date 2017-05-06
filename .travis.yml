@@ -7,7 +7,7 @@ branches:
   only:
     - master
 before_script:
-  - cd src
+  - cd Tests
 script:
-  - dotnet restore && dotnet build
+  - dotnet restore
   - dotnet test
