@@ -96,7 +96,7 @@ namespace WikiCore.DB
             db.SaveChanges();
         }
 
-        internal void UpdatePage(EditModel model)
+        public void UpdatePage(EditModel model)
         {
             var page = db.Pages.Where(p => p.PageId == model.Id).FirstOrDefault();
             page.Title = model.Title;
