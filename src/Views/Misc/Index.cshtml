@@ -3,25 +3,6 @@
 @{
   ViewData["Title"] = "Miscellaneous";
 }
-<h2>Settings</h2>
-
-<form method="post" asp-action="Save" asp-controller="Misc"> 
-    <div class="ui labeled input">
-  <div class="ui label">
-    Site Title
-  </div>
-  <input type="text" id="SiteTitle" placeholder="SiteTitle" asp-for="SiteTitle">
-</div><br />
-<br />
-<div class="ui checkbox">
-  <input asp-for="DisableRegistration" type="checkbox" value=""/>
-  <label>Disable Registration</label>
-</div>
-<br />
-<br />
-  <button type="submit" class="ui primary button">Save Settings</button>
-</form>
-
 <h2>Tags</h2>
 <h4>Remove</h4>
 <form method="post" asp-action="DeleteTag" asp-controller="Misc"> 
