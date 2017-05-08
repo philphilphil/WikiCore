@@ -8,19 +8,8 @@ namespace WikiCore.Models
 {
     public class EditModel
     {
-        private DBService _dbs;
-        public DBService dbs
-        {
-            get
-            {
-                if (_dbs == null)
-                {
-                    _dbs = new DBService();
-                }
-                return this._dbs;
-            }
-            set { }
-        }
+        private readonly IDBService _dbs;
+
         public string pageContent { get; set; }
 
         public List<SelectListItem> Categories = new List<SelectListItem>();
@@ -32,20 +21,22 @@ namespace WikiCore.Models
         public string Title { get; set; }
 
         public int Id { get; set; }
-        public EditModel(int id)
+        public EditModel(int id, IDBService dbs)
         {
-            var page = dbs.GetPageOrDefault(id);
+            _dbs = dbs;
+
+            var page = _dbs.GetPageOrDefault(id);
             this.pageContent = page.Content;
             this.Title = page.Title;
             this.Id = page.PageId;
-            this.Tags = dbs.LoadTagsForPage(page.PageId);
+            this.Tags = _dbs.LoadTagsForPage(page.PageId);
 
             LoadTagsForAutocomplete();
         }
 
         private void LoadTagsForAutocomplete()
         {
-            var allTags = dbs.GetAllTags().Select(t => t.Name);
+            var allTags = _dbs.GetAllTags().Select(t => t.Name);
 
             foreach (var t in allTags)
             {
@@ -54,15 +45,15 @@ namespace WikiCore.Models
 
         }
 
-        public EditModel(bool loadTags)
+        public EditModel(IDBService dbs)
         {
-            if (loadTags)
-            {
-                LoadTagsForAutocomplete();
-            }
+            _dbs = dbs;
+            LoadTagsForAutocomplete();
         }
+        
+        public EditModel()
+        {
 
-        public EditModel() {
         }
     }
 }

@@ -11,8 +11,10 @@ namespace WikiCore.Controllers
     public class HomeController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
-        public HomeController(SignInManager<IdentityUser> signInManager)
+        private readonly IDBService _dbs;
+        public HomeController(SignInManager<IdentityUser> signInManager, IDBService dbs)
         {
+            _dbs = dbs;
             this._signInManager = signInManager;
         }
 
@@ -22,7 +24,7 @@ namespace WikiCore.Controllers
             {
                 id = 1;
             }
-            PageModel m = new PageModel(id);
+            PageModel m = new PageModel(id, _dbs);
 
             return View(m);
         }
@@ -31,7 +33,7 @@ namespace WikiCore.Controllers
         [Authorize]
         public IActionResult Tag(string name)
         {
-            var t = new TagOverviewModel(name);
+            var t = new TagOverviewModel(name, _dbs);
             return View(t);
         }
 

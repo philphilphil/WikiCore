@@ -6,7 +6,7 @@ using WikiCore.Models;
 
 namespace WikiCore.DB
 {
-    public class DBService
+    public class DBService : IDBService
     {
 
         private readonly WikiContext db;
@@ -16,13 +16,13 @@ namespace WikiCore.DB
             this.db = context;
         }
 
-        public DBService()
-        {
-            //When no context is given create default one. this will always be the case except for unit tests
-            var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
-            this.db = new WikiContext(options);
-        }
-        internal int SavePage(EditModel model)
+        // public DBService()
+        // {
+        //     //When no context is given create default one. this will always be the case except for unit tests
+        //     var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
+        //     this.db = new WikiContext(options);
+        // }
+        public int SavePage(EditModel model)
         {
             var page = new Page
             {
@@ -106,7 +106,7 @@ namespace WikiCore.DB
         }
 
         //Create, Remove or add new Tags and reference them to Pages
-        private void UpdateTags(int pageId, string tags)
+        public void UpdateTags(int pageId, string tags)
         {
             List<String> tagList;
             if (string.IsNullOrEmpty(tags))
@@ -134,7 +134,7 @@ namespace WikiCore.DB
             }
         }
 
-        private void RemoveTagReference(int pageId, string tag)
+        public void RemoveTagReference(int pageId, string tag)
         {
             var tags = db.PageTags.Where(t => t.PageId == pageId && t.Tag.Name == tag).ToList();
 
@@ -143,7 +143,7 @@ namespace WikiCore.DB
         }
 
         // Get all tags for the given page as comma seperated string for the jQuery-TagEditor
-        internal string LoadTagsForPage(int pageId)
+        public string LoadTagsForPage(int pageId)
         {
             string pageTags = "";
 
@@ -156,7 +156,7 @@ namespace WikiCore.DB
         }
 
         //Check if reference between Tag and Page already exists, if not create it
-        private void CreatePageTagReference(int tagId, int pageId)
+        public void CreatePageTagReference(int tagId, int pageId)
         {
 
             PageTag tag = db.PageTags.Where(t => t.PageId == pageId && t.TagId == tagId).FirstOrDefault();
@@ -173,7 +173,7 @@ namespace WikiCore.DB
         }
 
         //Get Tag from db or create it if not existing yet
-        private Tag GetTag(string name)
+        public Tag GetTag(string name)
         {
 
             Tag tag = db.Tags.Where(t => t.Name == name).FirstOrDefault();
@@ -191,7 +191,6 @@ namespace WikiCore.DB
                 return tag;
             }
         }
-
     }
 
 }

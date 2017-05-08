@@ -11,19 +11,6 @@ namespace WikiCore.Models
 
     public class CloudModel
     {
-        private DBService _dbs;
-        public DBService dbs
-        {
-            get
-            {
-                if (_dbs == null)
-                {
-                    _dbs = new DBService();
-                }
-                return this._dbs;
-            }
-            set { }
-        }
         public string TagCloudJson { get; set; }
 
         public CloudModel()

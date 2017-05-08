@@ -35,6 +35,9 @@ namespace WikiCore
 
             services.AddDbContext<WikiContext>(options => options.UseSqlite("Filename=./WikiCoreDatabase.db"));
 
+
+services.AddScoped<IDBService, DBService>();
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<WikiContext>()
                 .AddDefaultTokenProviders();

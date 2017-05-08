@@ -60,13 +60,13 @@ namespace Tests
         [Fact]
         public void OnePageUpdated()
         {
-            EditModel em = new EditModel(false);
+            DBService dbs = new DBService(context);
+            EditModel em = new EditModel(dbs);
             em.Id = 1;
             em.pageContent = "empty";
             em.Tags = "eins,zwei,drei,vier";
             em.Title = "tit";
 
-            DBService dbs = new DBService(context);
             dbs.UpdatePage(em);
 
             var updatedPage = context.Pages.Where(x => x.PageId == 1).FirstOrDefault();
@@ -79,13 +79,14 @@ namespace Tests
         [Fact]
         public void OneTagDeletedFromPage()
         {
-            EditModel em = new EditModel(false);
+            DBService dbs = new DBService(context);
+            
+            EditModel em = new EditModel(dbs);
             em.Id = 2;
             em.pageContent = "empty";
             em.Tags = "eins,zwei,drei";
             em.Title = "tit";
 
-            DBService dbs = new DBService(context);
             dbs.UpdatePage(em);
 
             //should still find 4 tags in total (other references)
@@ -99,13 +100,14 @@ namespace Tests
         [Fact]
         public void TwoTagsAddedToPage()
         {
-            EditModel em = new EditModel(false);
+            DBService dbs = new DBService(context);
+            
+            EditModel em = new EditModel(dbs);
             em.Id = 2;
             em.pageContent = "empty";
             em.Tags = "eins,zwei,drei,vier,fuenf,sechs";
             em.Title = "tit";
 
-            DBService dbs = new DBService(context);
             dbs.UpdatePage(em);
 
             //should find 6 tags
