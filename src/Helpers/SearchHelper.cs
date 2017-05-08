@@ -11,20 +11,11 @@ namespace WikiCore.Helpers
 
         private const int descriptionWidth = 30;
 
-        public static List<SearchResult> Search(string searchText)
-        {
-            //TODO: fix context or move to service
-            var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
-            using (WikiContext db = new WikiContext(options))
-            {
-                return Search(searchText, db);
-            }
-        }
-        public static List<SearchResult> Search(string searchText, WikiContext db)
+        public static List<SearchResult> Search(string searchText, IDBService dbs)
         {
             List<SearchResult> result = new List<SearchResult>();
 
-            List<Page> pagesFound = db.Pages.Where(x => x.Content.ToLower().Contains(searchText) || x.Title.ToLower().Contains(searchText)).ToList();
+            List<Page> pagesFound = dbs.SearchPages(searchText);
 
             foreach (Page item in pagesFound)
             {

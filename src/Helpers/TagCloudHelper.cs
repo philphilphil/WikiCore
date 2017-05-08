@@ -8,22 +8,18 @@ namespace WikiCore.Helpers
 {
     public static class TagCloudHelper
     {
-        public static List<TagEntry> GetTagCloudJson()
+        public static List<TagEntry> GetTagCloudJson(IDBService dbs)
         {
             List<TagEntry> result = new List<TagEntry>();
 
-            //TODO: fix context or move to service
-            var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
-            using (WikiContext db = new WikiContext(options))
-            {
-                var tags = db.Tags.ToList();
+            var tags = dbs.GetAllTags();
 
-                foreach (var tag in tags)
-                {
-                    var weight = db.PageTags.Where(t => t.Tag == tag).Count();
-                    result.Add(new TagEntry { text = tag.Name, weight = weight, link = "/Tag/" + tag.Name });
-                }
+            foreach (var tag in tags)
+            {
+                int weight = dbs.GetTagWeight(tag);
+                result.Add(new TagEntry { text = tag.Name, weight = weight, link = "/Tag/" + tag.Name });
             }
+
             return result;
         }
     }

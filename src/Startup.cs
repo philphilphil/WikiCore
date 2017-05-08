@@ -33,8 +33,10 @@ namespace WikiCore
             // Add framework services.
             services.AddMvc();
 
-            services.AddDbContext<WikiContext>(options => options.UseSqlite("Filename=./WikiCoreDatabase.db"));
-
+            //Initialise di for database
+            var connectionString = "Filename=./" + Configuration["ConnectionStrings:DefaultConnection"];
+            services.AddDbContext<WikiContext>(options => options.UseSqlite(connectionString));
+            DbInitializer.InitializeDb(connectionString);
 
             services.AddScoped<IDBService, DBService>();
 
@@ -143,8 +145,6 @@ namespace WikiCore
                         new { controller = "Account", action = "Register" }
                     );
             });
-
-            DbInitializer.InitializeDb();
         }
     }
 }

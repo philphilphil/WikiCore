@@ -40,7 +40,7 @@ namespace WikiCore.Controllers
         [Authorize]
         public IActionResult Cloud(string name)
         {
-            var c = new CloudModel();
+            var c = new CloudModel(_dbs);
             return View(c);
         }
 
@@ -53,7 +53,7 @@ namespace WikiCore.Controllers
         public JsonResult Search(string text)
         {
 
-            var results = SearchHelper.Search(text.ToLower());
+            var results = SearchHelper.Search(text.ToLower(), _dbs);
             //Build correct object for semantic-ui search box
             var searchResults = new
             {

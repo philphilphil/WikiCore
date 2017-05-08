@@ -13,9 +13,9 @@ namespace WikiCore.Models
     {
         public string TagCloudJson { get; set; }
 
-        public CloudModel()
+        public CloudModel(IDBService dbs)
         {
-            var tags = TagCloudHelper.GetTagCloudJson();
+            var tags = TagCloudHelper.GetTagCloudJson(dbs);
             this.TagCloudJson = JsonConvert.SerializeObject(tags);
         }
     }

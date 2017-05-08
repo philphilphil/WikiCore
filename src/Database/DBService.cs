@@ -16,12 +16,6 @@ namespace WikiCore.DB
             this.db = context;
         }
 
-        // public DBService()
-        // {
-        //     //When no context is given create default one. this will always be the case except for unit tests
-        //     var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
-        //     this.db = new WikiContext(options);
-        // }
         public int SavePage(EditModel model)
         {
             var page = new Page
@@ -190,6 +184,16 @@ namespace WikiCore.DB
             {
                 return tag;
             }
+        }
+
+        public List<Page> SearchPages(string searchText)
+        {
+            return db.Pages.Where(x => x.Content.ToLower().Contains(searchText) || x.Title.ToLower().Contains(searchText)).ToList();
+        }
+
+        public int GetTagWeight(Tag tag)
+        {
+            return db.PageTags.Where(t => t.Tag == tag).Count();
         }
     }
 

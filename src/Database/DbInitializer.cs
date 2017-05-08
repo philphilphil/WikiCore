@@ -2,26 +2,29 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WikiCore.DB;
 
-public static class DbInitializer {
-    public static void InitializeDb() {
-        
-        var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite("Filename=./WikiCoreDatabase.db").Options;
-        using (WikiContext db = new WikiContext(options)) {
-            
+public static class DbInitializer
+{
+    public static void InitializeDb(string connectionString)
+    {
+
+        var options = new DbContextOptionsBuilder<WikiContext>().UseSqlite(connectionString).Options;
+        using (WikiContext db = new WikiContext(options))
+        {
+
             db.Database.EnsureCreated();
 
             //Only Initialize if DB is Empty
             if (db.Pages.Any())
                 return;
-            
+
             CreateOverviewPage(db);
-            
+
         }
     }
 
     private static void CreateOverviewPage(WikiContext db)
     {
-        
+
         Tag t1 = new Tag();
         t1.Name = "WikiCore";
         t1.Color = 1;
