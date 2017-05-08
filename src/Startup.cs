@@ -34,7 +34,7 @@ namespace WikiCore
             services.AddMvc();
 
             //Initialise di for database
-            var connectionString = "Filename=./" + Configuration["ConnectionStrings:DefaultConnection"];
+            var connectionString = "Filename=./" + Configuration["ConnectionStrings:SqliteFileName"];
             services.AddDbContext<WikiContext>(options => options.UseSqlite(connectionString));
             DbInitializer.InitializeDb(connectionString);
 
