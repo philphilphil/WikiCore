@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WikiCore.Configuration;
 using WikiCore.DB;
 
 namespace WikiCore
@@ -39,6 +40,8 @@ namespace WikiCore
             DbInitializer.InitializeDb(connectionString);
 
             services.AddScoped<IDBService, DBService>();
+
+            services.Configure<ApplicationConfigurations>(Configuration.GetSection("ApplicationConfigurations"));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<WikiContext>()

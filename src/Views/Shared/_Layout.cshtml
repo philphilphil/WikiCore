@@ -1,13 +1,15 @@
 @using System.Security.Principal
+@using Microsoft.Extensions.Options;
+@using WikiCore.Configuration;
 
-
+@inject IOptions<ApplicationConfigurations> OptionsApplicationConfiguration
 <!doctype html>
 <html lang="">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@ViewData["Title"] - WikiCore</title>
+    <title>@ViewData["Title"] - @OptionsApplicationConfiguration.Value.SiteTitle</title>
 
     <link rel="stylesheet" href="~/lib/semantic/dist/semantic.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -31,7 +33,7 @@
                 <i class="sidebar icon"></i>
                 <span class="sr-only">Toggle Navigation</span>
             </a>
-            <a href="/" class="header item">WikiCore</a>
+            <a href="/" class="header item">@OptionsApplicationConfiguration.Value.SiteTitle</a>
             @if (User.Identity.IsAuthenticated) {
                 <menulink class="blue item"  icon-name="sticky note" controller-name="Home" action-name="Index" menu-text="Page" link-name="Home/Index"></menulink>
                 <menulink class="blue item"  icon-name="cloud" controller-name="Cloud" action-name="Index" menu-text="Tags" link-name="Home/Cloud"></menulink>
