@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using WikiCore.Configuration;
 
 namespace WikiCore.Controllers
 {
@@ -12,10 +14,12 @@ namespace WikiCore.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly IOptions<ApplicationConfigurations> _options;
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<ApplicationConfigurations> options)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._options = options;
         }
 
         public IActionResult Register()
@@ -26,6 +30,12 @@ namespace WikiCore.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(string username, string password, string repassword)
         {
+            if(!_options.Value.EnableRegistration)
+            {
+                ModelState.AddModelError(string.Empty, "Registration is disabled.");
+                return View();
+            }
+
             if(string.IsNullOrEmpty(password))
             { 
                 ModelState.AddModelError(string.Empty, "You need a password.");
