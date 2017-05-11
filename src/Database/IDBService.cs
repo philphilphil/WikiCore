@@ -21,5 +21,6 @@ namespace WikiCore.DB
         string LoadTagsForPage(int pageId);
         void CreatePageTagReference(int tagId, int pageId);
         Tag GetTag(string name);
+        bool SomeUserRegistered();
     }
 }

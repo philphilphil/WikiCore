@@ -195,6 +195,11 @@ namespace WikiCore.DB
         {
             return db.PageTags.Where(t => t.Tag == tag).Count();
         }
+
+        public bool SomeUserRegistered()
+        {
+           return db.Users.Any();
+        }
     }
 
 }
