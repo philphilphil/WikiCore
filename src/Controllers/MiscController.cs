@@ -30,7 +30,10 @@ namespace WikiCore.Controllers
         [Authorize]
         public IActionResult DeleteTag(MiscModel m)
         {
-            _dbs.DeleteTag(m.TagId);
+            if(m.TagToDeleteId == 0) {
+                return Error("All tags are deleted.");
+            }
+            _dbs.DeleteTag(m.TagToDeleteId);
             return RedirectToAction("Index");
         }
     }

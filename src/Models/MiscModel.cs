@@ -11,7 +11,7 @@ namespace WikiCore.Models
     {
         public List<Page> Pages = new List<Page>();
         public string CategoryName { get; set; }
-        public int TagId { get; set; }
+        public int TagToDeleteId { get; set; }
 
         public List<SelectListItem> TagsSelect = new List<SelectListItem>();
 
