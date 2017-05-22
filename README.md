@@ -3,7 +3,7 @@ WikiCore is a modest, small and fast Wiki featuring [MarkDown](https://daringfir
 
 Unlike regular Wikis pages are organized with tags.
 
-Latest Stable release: [v1.0](https://github.com/philphilphil/WikiCore/releases)
+Latest Stable release: [v1.1](https://github.com/philphilphil/WikiCore/releases)
 ![WikiCoreScreenshot](http://i.imgur.com/kBMcgIJ.png "Edit view")
 ## Setup
 ### Run
