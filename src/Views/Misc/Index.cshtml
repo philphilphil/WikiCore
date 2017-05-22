@@ -5,7 +5,7 @@
 }
 <h2>Tags</h2>
 <h4>Remove</h4>
-<form method="post" asp-action="DeleteTag" asp-controller="Misc"> 
+<form method="post" asp-action="DeleteTag" asp-controller="Misc" onsubmit="return confirm('Tag and all connections to pages will be irreversible removed.');"> 
   <div class="ui labeled input">
   <div class="ui label">
     Tag
