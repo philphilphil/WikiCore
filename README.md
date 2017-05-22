@@ -3,6 +3,8 @@ WikiCore is a modest, small and fast Wiki featuring [MarkDown](https://daringfir
 
 Unlike regular Wikis pages are organized with tags.
 
+In the default settings its possible to create only one account. Please see [the wiki](https://github.com/philphilphil/WikiCore/wiki/Configuration) for more information.
+
 Latest Stable release: [v1.1](https://github.com/philphilphil/WikiCore/releases)
 ![WikiCoreScreenshot](http://i.imgur.com/kBMcgIJ.png "Edit view")
 ## Setup
