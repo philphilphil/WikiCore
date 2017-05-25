@@ -1,7 +1,7 @@
 <h1>Register</h1>
 <div asp-validation-summary="All" class="ui error message"></div>
 
-<form method="POST" class="ui form">
+<form method="POST" class="ui form" asp-action="Register" asp-controller="Account">
     <div class="field">
         <label>Username</label>
         <input type="text" name="username"/>
