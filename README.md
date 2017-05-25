@@ -1,7 +1,7 @@
 # WikiCore [![Build Status](https://travis-ci.org/philphilphil/WikiCore.svg?branch=master)](https://travis-ci.org/philphilphil/WikiCore)
 WikiCore is a modest, small and fast Wiki featuring [MarkDown](https://daringfireball.net/projects/markdown/) editing.
-
-Unlike regular Wikis pages are organized with tags.
+Unlike regular Wikis pages are organized with tags instead of categories. 
+Although there is a Login-System, there is no account-management neither user information bound to pages. The Intended purpose is private use.
 
 In the default settings its possible to create only one account. Please see [the wiki](https://github.com/philphilphil/WikiCore/wiki/Configuration) for more information.
 
