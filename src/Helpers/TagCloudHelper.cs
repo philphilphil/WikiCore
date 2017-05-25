@@ -17,7 +17,7 @@ namespace WikiCore.Helpers
             foreach (var tag in tags)
             {
                 int weight = dbs.GetTagWeight(tag);
-                result.Add(new TagEntry { text = tag.Name, weight = weight, link = "/Tag/" + tag.Name });
+                result.Add(new TagEntry { text = tag.Name, weight = weight, link = "/Tag/" + System.Net.WebUtility.UrlEncode(tag.Name) });
             }
 
             return result;

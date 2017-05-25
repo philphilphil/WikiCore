@@ -33,6 +33,7 @@ namespace WikiCore.Controllers
         [Authorize]
         public IActionResult Tag(string name)
         {
+            name = System.Net.WebUtility.UrlDecode(name);
             var t = new TagOverviewModel(name, _dbs);
             return View(t);
         }

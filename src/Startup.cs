@@ -113,8 +113,7 @@ namespace WikiCore
                 routes.MapRoute(
                         "Tag",
                         "Tag/{name}",
-                        new { controller = "Home", action = "Tag" },
-                        new { name = @"\w+" }
+                        new { controller = "Home", action = "Tag" }
                     );
 
                 routes.MapRoute(
